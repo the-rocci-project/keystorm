@@ -1,4 +1,4 @@
 class V3::Auth::LocalController < ApplicationController
-  def create
+  def password
   end
 end

@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+/vendor/
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -18,3 +19,7 @@
 !/tmp/.keep
 
 .byebug_history
+
+# Ignore YARD
+/.yardoc
+/doc

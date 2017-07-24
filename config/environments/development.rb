@@ -32,7 +32,11 @@ Rails.application.configure do
   # config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
-  config.active_support.deprecation = :log
+  config.log_level = config.keystorm['log_level'].to_sym
+
+  config.logstasher.enabled = true
+  config.logstasher.suppress_app_log = false
+  config.logstasher.source = 'keystorm'
 
   # Raise an error on page load if there are pending migrations.
   # config.active_record.migration_error = :page_load

@@ -9,9 +9,6 @@ Rails.application.routes.draw do
       end
       resources :tokens, only: [:create], constraints: lambda { |r| nil }
       resources :tokens, only: [:create], controller: 'local', constraints: lambda { |r| "x" }
-      # resources :local, only: [] do
-      #   post 'password' => 'local#password', on: :collection, constrains: 
-      # end
     end
   end
 end

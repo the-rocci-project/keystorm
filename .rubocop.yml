@@ -1,0 +1,14 @@
+AllCops:
+  TargetRubyVersion: 2.0
+  Exclude:
+    - 'vendor/**/*'
+
+Metrics/LineLength:
+  Max: 120
+
+Security/Eval:
+  Exclude:
+    - 'Gemfile'
+
+Style/Documentation:
+  Enabled: false
