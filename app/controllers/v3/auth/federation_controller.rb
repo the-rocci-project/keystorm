@@ -1,7 +1,9 @@
-class V3::Auth::FederationController < ApplicationController
-  def oidc
-  end
+module V3
+  module Auth
+    class FederationController < ApplicationController
+      def oidc; end
 
-  def voms
+      def voms; end
+    end
   end
 end

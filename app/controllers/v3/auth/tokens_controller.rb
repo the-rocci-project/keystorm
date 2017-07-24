@@ -1,4 +1,7 @@
-class V3::Auth::TokensController < ApplicationController
-  def create
+module V3
+  module Auth
+    class TokensController < ApplicationController
+      def create; end
+    end
   end
 end
