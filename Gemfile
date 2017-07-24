@@ -15,6 +15,7 @@ group :development, :test do
   gem 'byebug'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rails_best_practices'
+  gem 'rspec-rails', '~> 3.5'
   gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

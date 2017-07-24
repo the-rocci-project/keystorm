@@ -1,4 +1,4 @@
 unless Rails.env.production?
-  desc 'Run acceptance tests (tests + rbp + rubocop)'
-  task acceptance: %i[test rbp rubocop]
+  desc 'Run acceptance tests (spec + rbp + rubocop)'
+  task acceptance: %i[spec rbp rubocop]
 end
