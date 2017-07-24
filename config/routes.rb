@@ -7,8 +7,8 @@ Rails.application.routes.draw do
         post 'oidc', on: :collection
         post 'voms', on: :collection
       end
-      resources :tokens, only: [:create], constraints: ->(_r) { nil }
-      resources :tokens, only: [:create], controller: 'local', constraints: ->(_r) { 'x' }
+      resources :tokens, only: [:create], constraints: RoutingConstraints::ScopedTokenConstraint.new
+      resources :tokens, only: [], controller: 'local', constraints: RoutingConstraints::LocalPasswordConstraint.new
     end
   end
 end
