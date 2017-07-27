@@ -40,7 +40,11 @@ module Auth
       end
 
       def parse_hash_groups!(hash)
-        hash['GRST_VOMS_FQANS']
+        groups = Hash.new([])
+        hash['GRST_VOMS_FQANS'].scan(%r{([\w\.]*)\/Role=(\w*)\/Capability=NULL})
+                               .uniq
+                               .each { |pair| groups[pair[0]] += [pair[1]] }
+        groups
       end
     end
   end

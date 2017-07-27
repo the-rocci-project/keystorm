@@ -141,7 +141,7 @@ describe Auth::Voms, type: :model do
       let(:correct_hash) do
         { id: '6694ddfebb77800c4d0aa0c6e3a7eb35bf7b3df83c312c23b8ca470930c4317b',
           email: 'memail@mail.ru',
-          groups: '/fedcloud.egi.eu/Role=NULL/Capability=NULL',
+          groups: { 'fedcloud.egi.eu' => ['NULL'] },
           authentication: 'federation',
           name: 'Michal Kimle 1535',
           identity: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
