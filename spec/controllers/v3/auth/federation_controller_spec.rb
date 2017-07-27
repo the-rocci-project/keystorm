@@ -5,7 +5,7 @@ describe V3::Auth::FederationController, type: :controller do
     let(:oidc_env) do
       { 'OIDC_sub'                     => '1',
         'OIDC_email'                   => 'ben.dover@majl.ru',
-        'OIDC_edu_person_entitlements' => 'group',
+        'OIDC_edu_person_entitlements' => 'urn:mace:egi.eu:aai.egi.eu:member@fedcloud.egi.eu',
         'OIDC_access_token_expires'    => '123456789',
         'OIDC_name'                    => 'Ben Dover',
         'OIDC_iss'                     => 'gogol.com',
@@ -15,7 +15,7 @@ describe V3::Auth::FederationController, type: :controller do
     let(:credentials_hash) do
       { 'id'             => '1',
         'email'          => 'ben.dover@majl.ru',
-        'groups'         => 'group',
+        'groups'         => { 'fedcloud.egi.eu' => ['member'] },
         'authentication' => 'federation',
         'name'           => 'Ben Dover',
         'identity'       => '1',

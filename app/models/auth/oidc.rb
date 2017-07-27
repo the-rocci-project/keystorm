@@ -5,7 +5,7 @@ module Auth
         check_hash!(hash)
         UnifiedCredentials.new(id: hash['OIDC_sub'],
                                email: hash['OIDC_email'],
-                               groups: hash['OIDC_edu_person_entitlements'],
+                               groups: parse_hash_groups(hash),
                                authentication: 'federation',
                                name: hash['OIDC_name'],
                                identity: hash['OIDC_sub'],
@@ -25,6 +25,14 @@ module Auth
                     OIDC_name
                     OIDC_iss
                     OIDC_acr].all? { |key| hash.key?(key) }
+      end
+
+      def parse_hash_groups(hash)
+        groups = Hash.new([])
+        hash['OIDC_edu_person_entitlements'].scan(/(\w*)@([\w\.]*)/)
+                                            .uniq
+                                            .each { |pair| groups[pair[1]] += [pair[0]] }
+        groups
       end
     end
   end
