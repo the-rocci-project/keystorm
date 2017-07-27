@@ -1,0 +1,47 @@
+require 'digest'
+
+module Auth
+  class Voms
+    class << self
+      def unified_credentials(hash)
+        dn = parse_hash_dn!(hash)
+        UnifiedCredentials.new(id: Digest::SHA256.hexdigest(dn),
+                               email: Rails.configuration.keystorm['default_email'],
+                               groups: parse_hash_groups!(hash),
+                               authentication: 'federation',
+                               name: parse_dn_name!(dn),
+                               identity: dn,
+                               expiration: parse_hash_exp!(hash))
+      end
+
+      private
+
+      def parse_hash_dn!(hash)
+        x509cred = hash.select { |key, value| /GRST_CRED_\d+/ =~ key && value.start_with?('X509USER') }
+        raise Errors::AuthError, 'voms hash has invalid X509USER "GRST_CRED_*" variable set' unless x509cred.size == 1
+        parsed = x509cred.values.first.split(' ', 5)
+        raise Errors::AuthError, 'failed to parse DN from voms hash' unless parsed.size == 5
+        parsed[4]
+      end
+
+      def parse_dn_name!(dn)
+        matched = /CN=([\w\s]*)$/.match(dn)
+        raise Errors::AuthError, 'failed to parse CN from X509USER DN' \
+          unless matched && matched.size == 2
+        matched[1]
+      end
+
+      def parse_hash_exp!(hash)
+        vomscred = hash.select { |key, value| /GRST_CRED_\d+/ =~ key && value.start_with?('VOMS') }
+        raise Errors::AuthError, 'voms hash has invalid VOMS "GRST_CRED_*" variable set' unless vomscred.size == 1
+        parsed = vomscred.values.first.split(' ')
+        raise Errors::AuthError, 'failed to parse DN from voms hash' unless parsed.size >= 3
+        parsed[2]
+      end
+
+      def parse_hash_groups!(hash)
+        hash['GRST_VOMS_FQANS']
+      end
+    end
+  end
+end

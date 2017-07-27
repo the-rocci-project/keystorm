@@ -5,6 +5,10 @@ defaults: &defaults
     secret: oneadmin:opennebula
     api-call-timeout: 3h
   log_level: debug
+  token_cipher: AES_123_CDE
+  token_key: abcdefghijklmnoprstuvxyz
+  token_iv: 123456789
+  default_email: nomail@nomail.com
 
 production:
   <<: *defaults

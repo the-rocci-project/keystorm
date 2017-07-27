@@ -4,12 +4,16 @@ module V3
       TIME_FORMAT = '%Y-%m-%dT%H:%M:%S.%L000Z'.freeze
 
       def oidc
-        credentials = ::Auth::Oidc.unified_credentials(ENV.select { |name| name.start_with?(name) })
+        credentials = ::Auth::Oidc.unified_credentials(ENV.select { |name| name.start_with?('OIDC') })
         headers['X-Subject-Token'] = ::Tokenator.to_token(credentials.to_hash)
         render json: response_hash(credentials, 'oidc')
       end
 
-      def voms; end
+      def voms
+        credentials = ::Auth::Voms.unified_credentials(ENV.select { |name| name.start_with?('GRST', 'SSL') })
+        headers['X-Subject-Token'] = ::Tokenator.to_token(credentials.to_hash)
+        render json: response_hash(credentials, 'voms')
+      end
 
       private
 

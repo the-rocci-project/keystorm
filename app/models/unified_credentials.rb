@@ -11,8 +11,8 @@ class UnifiedCredentials
     @name = args.fetch(:name)
     @identity = args.fetch(:identity)
     @expiration = args.fetch(:expiration)
-    @issuer = args.fetch(:issuer)
-    @acr = args.fetch(:acr)
+    @issuer = args.fetch(:issuer, nil)
+    @acr = args.fetch(:acr, nil)
   end
 
   def to_hash

@@ -14,17 +14,23 @@ class Tokenator
 
     private
 
+    def cipher(mode)
+      raise ArgumentError, 'only support encrypt and decrypt modes' \
+        unless %i[encrypt decrypt].include?(mode)
+
+      c     = OpenSSL::Cipher.new(Rails.configuration.keystorm['token_cipher']).send(mode)
+      c.key = Rails.configuration.keystorm['token_key']
+      c.iv  = Rails.configuration.keystorm['token_iv']
+      c
+    end
+
     def encrypt(data)
-      encipher = OpenSSL::Cipher.new(Rails.configuration.keystorm['token_cipher']).encrypt
-      encipher.key = Rails.configuration.keystorm['token_key']
-      encipher.iv  = Rails.configuration.keystorm['token_iv']
+      encipher = cipher(:encrypt)
       encipher.update(data) + encipher.final
     end
 
     def decrypt(data)
-      decipher = OpenSSL::Cipher.new(Rails.configuration.keystorm['token_cipher']).decrypt
-      decipher.key = Rails.configuration.keystorm['token_key']
-      decipher.iv  = Rails.configuration.keystorm['token_iv']
+      decipher = cipher(:decrypt)
       decipher.update(data) + decipher.final
     end
   end
