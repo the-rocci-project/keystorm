@@ -1,4 +1,5 @@
-class V3::Auth::LocalController < ApplicationController
-  def create
+module V3
+  module Auth
+    class LocalController < ApplicationController; end
   end
 end

@@ -1,0 +1,25 @@
+language: ruby
+
+rvm:
+  - 2.2.7
+  - 2.3.4
+  - 2.4.1
+  - ruby-head
+
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+  fast_finish: true
+
+branches:
+  only:
+    - master
+
+script: bundle exec rake acceptance
+
+before_install: 'gem install bundler -v ">= 1.15"'
+
+env:
+  - ON_TRAVIS_CI=yes
+
+sudo: false

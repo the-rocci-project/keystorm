@@ -13,7 +13,7 @@ Rails.application.configure do
   config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
-  if Rails.root.join('tmp/caching-dev.txt').exist?
+  if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
@@ -32,11 +32,14 @@ Rails.application.configure do
   # config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
-  config.active_support.deprecation = :log
+  config.log_level = config.keystorm['log_level'].to_sym
+
+  config.logstasher.enabled = true
+  config.logstasher.suppress_app_log = false
+  config.logstasher.source = 'keystorm'
 
   # Raise an error on page load if there are pending migrations.
   # config.active_record.migration_error = :page_load
-
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
