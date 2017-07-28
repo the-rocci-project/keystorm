@@ -194,6 +194,7 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    xmlrpc (0.3.0)
     yard (0.9.9)
 
 PLATFORMS
@@ -215,6 +216,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   vcr (~> 3.0)
   webmock (~> 3.0)
+  xmlrpc (~> 0.3)
   yard
 
 BUNDLED WITH

@@ -15,9 +15,9 @@ branches:
   only:
     - master
 
-script: bundle exec rake acceptance
-
 before_install: 'gem install bundler -v ">= 1.15"'
+install: 'bundle install --jobs=3 --retry=3'
+script: bundle exec rake acceptance
 
 env:
   - ON_TRAVIS_CI=yes
