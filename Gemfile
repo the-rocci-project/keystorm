@@ -19,5 +19,13 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'vcr', '~> 3.0'
+  gem 'webmock', '~> 3.0'
   gem 'yard'
+end
+
+# Include external bundles
+Dir.glob(File.join(File.dirname(__FILE__), 'Gemfile.*')) do |gemfile|
+  next if gemfile.end_with?('.lock')
+  eval(IO.read(gemfile), binding)
 end

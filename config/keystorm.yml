@@ -1,5 +1,9 @@
 
 defaults: &defaults
+  opennebula:
+    endpoint: http://localhost:2633/RPC2
+    secret: oneadmin:opennebula
+    api-call-timeout: 3h
   log_level: debug
 
 production:

@@ -12,3 +12,18 @@ Security/Eval:
 
 Style/Documentation:
   Enabled: false
+
+Metrics/LineLength:
+  Max: 135
+
+Rails/DynamicFindBy:
+  Exclude:
+    - 'app/lib/connectors/opennebula/*.rb'
+    - 'spec/connectors/opennebula/*.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
+    - '*.gemspec'
