@@ -28,8 +28,8 @@ describe V3::Auth::FederationController, type: :controller do
       allow(Rails.configuration)
         .to receive(:keystorm)
         .and_return('token_cipher' => 'AES-128-CBC',
-                    'token_key' => '7\xB8c7\x99\xE2\x1Fy\xB3jv[\xEFf\x1E\x92',
-                    'token_iv' => '\xEAQ\x1C\xF8\xB0\x84lvp\x88~\xC0L?%\xDD')
+                    'token_key' => '1234567890123456',
+                    'token_iv' => '0987654321098765')
       stub_const('ENV', ENV.to_hash.merge(oidc_env))
     end
 
