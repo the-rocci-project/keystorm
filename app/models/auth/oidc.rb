@@ -29,17 +29,20 @@ module Auth
 
       def parse_hash_groups(hash)
         groups = Hash.new([])
-        hash['OIDC_edu_person_entitlements']
-          .scan(group_regexp)
-          .uniq
-          .each { |pair| groups[pair[1]] += [pair[0]] }
+        regexp = group_regexp
+        hash['OIDC_edu_person_entitlements'].split(';').each do |line|
+          matches = line.match(regexp)
+          groups[matches[:group]] += [matches[:role]] if matches
+        end
         groups
       end
 
       def group_regexp
         Regexp.new(Rails.configuration.keystorm['oidc']['matcher']
-                     .gsub(/\{role\}/, '(\w*)')
-                     .gsub(/\{group\}/, '([\w\.]*)'))
+                     .gsub(/\{role\}/, '(?<role>[^\s]+)')
+                     .gsub(/\{group\}/, '(?<group>[^\s]+)')
+                     .prepend('^')
+                     .concat('$'))
       end
     end
   end
