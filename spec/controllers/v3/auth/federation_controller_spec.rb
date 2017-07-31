@@ -25,11 +25,6 @@ describe V3::Auth::FederationController, type: :controller do
     end
 
     before do
-      allow(Rails.configuration)
-        .to receive(:keystorm)
-        .and_return('token_cipher' => 'AES-128-CBC',
-                    'token_key' => '1234567890123456',
-                    'token_iv' => '0987654321098765')
       stub_const('ENV', ENV.to_hash.merge(oidc_env))
     end
 

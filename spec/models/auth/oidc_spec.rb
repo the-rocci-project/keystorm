@@ -20,7 +20,7 @@ describe Auth::Oidc, type: :model do
       end
 
       it 'returns 2 groups' do
-        expect(groups.keys.size).to eq(2)
+        expect(groups.keys.size).to eq(1)
       end
     end
   end

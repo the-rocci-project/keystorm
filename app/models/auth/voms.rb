@@ -6,10 +6,10 @@ module Auth
       def unified_credentials(hash)
         dn = parse_hash_dn!(hash)
         UnifiedCredentials.new(id: Digest::SHA256.hexdigest(dn),
-                               email: Rails.configuration.keystorm['default_email'],
+                               email: Rails.configuration.keystorm['voms']['default_email'],
                                groups: parse_hash_groups!(hash),
                                authentication: 'federation',
-                               name: parse_dn_name!(dn),
+                               name: dn,
                                identity: dn,
                                expiration: parse_hash_exp!(hash))
       end
@@ -24,13 +24,6 @@ module Auth
         parsed[4]
       end
 
-      def parse_dn_name!(dn)
-        matched = /CN=([\w\s]*)$/.match(dn)
-        raise Errors::AuthError, 'failed to parse CN from X509USER DN' \
-          unless matched && matched.size == 2
-        matched[1]
-      end
-
       def parse_hash_exp!(hash)
         vomscred = hash.select { |key, value| /GRST_CRED_\d+/ =~ key && value.start_with?('VOMS') }
         raise Errors::AuthError, 'voms hash has invalid VOMS "GRST_CRED_*" variable set' unless vomscred.size == 1
@@ -40,6 +33,7 @@ module Auth
       end
 
       def parse_hash_groups!(hash)
+        raise Error::AuthError, 'voms group env variable is not set' unless hash.key?('GRST_VOMS_FQANS')
         groups = Hash.new([])
         hash['GRST_VOMS_FQANS'].scan(%r{([\w\.]*)\/Role=(\w*)\/Capability=NULL})
                                .uniq

@@ -106,25 +106,6 @@ describe Auth::Voms, type: :model do
     end
   end
 
-  describe '#parse_dn_name!' do
-    context 'with correct dn' do
-      let(:dn) { '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535' }
-
-      it 'returns correct name' do
-        expect(Auth::Voms.send(:parse_dn_name!, dn)).to eq('Michal Kimle 1535')
-      end
-    end
-
-    context 'with incorrect dn with no CN' do
-      let(:dn) { '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CNN=Michal Kimle 1535' }
-
-      it 'will raise errror' do
-        expect { Auth::Voms.send(:parse_dn_name!, dn) }.to \
-          raise_error(Errors::AuthError)
-      end
-    end
-  end
-
   describe '#unified_credentials' do
     context 'with correct hash' do
       let(:env_hash) do
@@ -140,10 +121,10 @@ describe Auth::Voms, type: :model do
 
       let(:correct_hash) do
         { id: '6694ddfebb77800c4d0aa0c6e3a7eb35bf7b3df83c312c23b8ca470930c4317b',
-          email: 'memail@mail.ru',
+          email: 'nomail@nomail.com',
           groups: { 'fedcloud.egi.eu' => ['NULL'] },
           authentication: 'federation',
-          name: 'Michal Kimle 1535',
+          name: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
           identity: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
           expiration: '1500424487',
           acr: nil,
@@ -151,9 +132,6 @@ describe Auth::Voms, type: :model do
       end
 
       before do
-        allow(Rails.configuration)
-          .to receive(:keystorm)
-          .and_return('default_email' => 'memail@mail.ru')
         stub_const('ENV', ENV.to_hash.merge(env_hash))
       end
 

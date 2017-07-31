@@ -1,14 +1,16 @@
-
 defaults: &defaults
   opennebula:
     endpoint: http://localhost:2633/RPC2
     secret: oneadmin:opennebula
     api-call-timeout: 3h
   log_level: debug
-  token_cipher: AES_128_CBC
-  token_key: abcdefghijklmnoprstuvxyz
-  token_iv: 123456789
-  default_email: nomail@nomail.com
+  token_cipher: AES-128-CBC
+  token_key: bbbbbbbbbbbbbbbb
+  token_iv: aaaaaaaaaaaaaaaa
+  oidc:
+    group_path: urn:mace:egi.eu:aai.egi.eu:{role}@{group}
+  voms:
+    default_email: nomail@nomail.com
 
 production:
   <<: *defaults
