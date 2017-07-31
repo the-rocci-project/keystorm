@@ -8,7 +8,7 @@ defaults: &defaults
   token_key: bbbbbbbbbbbbbbbb
   token_iv: aaaaaaaaaaaaaaaa
   oidc:
-    group_path: urn:mace:egi.eu:aai.egi.eu:{role}@{group}
+    matcher: urn:mace:egi.eu:aai.egi.eu:{role}@{group}
   voms:
     default_email: nomail@nomail.com
 

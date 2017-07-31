@@ -37,7 +37,7 @@ module Auth
       end
 
       def group_regexp
-        Regexp.new(Rails.configuration.keystorm['oidc']['group_path']
+        Regexp.new(Rails.configuration.keystorm['oidc']['matcher']
                      .gsub(/\{role\}/, '(\w*)')
                      .gsub(/\{group\}/, '([\w\.]*)'))
       end
