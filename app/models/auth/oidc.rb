@@ -1,36 +1,36 @@
 module Auth
   class Oidc
     class << self
+      ENV_NAMES = {
+        id: 'OIDC_sub',
+        email: 'OIDC_email',
+        groups: 'OIDC_edu_person_entitlements',
+        name: 'OIDC_name',
+        identity: 'OIDC_sub',
+        expiration: 'OIDC_access_token_expires',
+        issuer: 'OIDC_iss',
+        acr: 'OIDC_acr'
+      }.freeze
+
       def unified_credentials(hash)
         check_hash!(hash)
-        UnifiedCredentials.new(id: hash['OIDC_sub'],
-                               email: hash['OIDC_email'],
-                               groups: parse_hash_groups(hash),
-                               authentication: 'federation',
-                               name: hash['OIDC_name'],
-                               identity: hash['OIDC_sub'],
-                               expiration: hash['OIDC_access_token_expires'],
-                               issuer: hash['OIDC_iss'],
-                               acr: hash['OIDC_acr'])
+        uc_hash = ENV_NAMES.map { |key, value| [key, hash[value]] }.to_h
+        uc_hash[:authentication] = 'federation'
+        uc_hash[:groups] = parse_hash_groups(hash)
+        UnifiedCredentials.new(uc_hash)
       end
 
       private
 
       def check_hash!(hash)
-        raise AuthError, 'invalid oidc credential hash' \
-          unless %w[OIDC_sub
-                    OIDC_email
-                    OIDC_edu_person_entitlements
-                    OIDC_access_token_expires
-                    OIDC_name
-                    OIDC_iss
-                    OIDC_acr].all? { |key| hash.key?(key) }
+        raise Errors::AuthError, 'invalid oidc credential hash' \
+          unless ENV_NAMES.values.all? { |key| hash.key?(key) }
       end
 
       def parse_hash_groups(hash)
         groups = Hash.new([])
         regexp = group_regexp
-        hash['OIDC_edu_person_entitlements'].split(';').each do |line|
+        hash[ENV_NAMES[:groups]].split(';').each do |line|
           matches = line.match(regexp)
           groups[matches[:group]] += [matches[:role]] if matches
         end
