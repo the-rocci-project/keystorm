@@ -17,6 +17,7 @@ group :development, :test do
   gem 'rails_best_practices'
   gem 'rspec-rails', '~> 3.5'
   gem 'rubocop', require: false
+  gem 'rubocop-rspec', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'vcr', '~> 3.0'

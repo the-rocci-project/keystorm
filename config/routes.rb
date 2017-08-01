@@ -4,8 +4,8 @@ Rails.application.routes.draw do
     namespace :auth do
       resources :projects, only: [:index]
       resources :federation, only: [] do
-        post 'oidc', on: :collection
-        post 'voms', on: :collection
+        get 'oidc', on: :collection
+        get 'voms', on: :collection
       end
       resources :tokens, only: [:create], constraints: RoutingConstraints::ScopedTokenConstraint.new
       resources :tokens, only: [], controller: 'local', constraints: RoutingConstraints::LocalPasswordConstraint.new

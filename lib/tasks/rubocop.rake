@@ -3,6 +3,7 @@ unless Rails.env.production?
 
   desc 'Execute rubocop -DR'
   RuboCop::RakeTask.new(:rubocop) do |tsk|
+    tsk.requires << 'rubocop-rspec'
     tsk.options = ['-DR'] # rails + display cop name
   end
 end
