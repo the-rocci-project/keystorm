@@ -11,6 +11,8 @@ module Connectors
       def exclude
         self.class::EXCLUDE
       end
+
+      alias list find_all
     end
   end
 end

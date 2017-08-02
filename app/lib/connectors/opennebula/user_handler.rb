@@ -12,9 +12,7 @@ module Connectors
         self.class::EXCLUDE
       end
 
-      def list
-        find_all
-      end
+      alias list find_all
 
       def create(username, password, auth, group)
         user_alloc = OpenNebula::User.build_xml

@@ -13,9 +13,9 @@ describe Connectors::Opennebula::GroupHandler do
     end
   end
 
-  describe '.find_all', :vcr do
+  describe '.list', :vcr do
     it 'returns all groups (other than excluded)' do
-      groups = handler.find_all
+      groups = handler.list
       expect(groups.count).to eq(4)
     end
   end
