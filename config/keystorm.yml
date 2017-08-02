@@ -1,4 +1,5 @@
 defaults: &defaults
+  cloud: opennebula
   opennebula:
     endpoint: http://localhost:2633/RPC2
     secret: oneadmin:opennebula
