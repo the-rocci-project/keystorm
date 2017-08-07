@@ -23,7 +23,7 @@ module Auth
           matches = cred.match(/^X509USER (\d+) (\d+) (\d+) (?<dn>.+)$/)
           return matches[:dn] if matches
         end
-        raise Errors::AuthError, 'failed to parse dn from env variables'
+        raise Errors::AuthenticationError, 'failed to parse dn from env variables'
       end
 
       def parse_hash_exp!(hash)
@@ -31,11 +31,11 @@ module Auth
           matches = cred.match(/^VOMS (\d+) (?<expiration>\d+) (\d+) (.+)$/)
           return matches[:expiration] if matches
         end
-        raise Errors::AuthError, 'failed to parse expiration from env variables'
+        raise Errors::AuthenticationError, 'failed to parse expiration from env variables'
       end
 
       def parse_hash_groups!(hash)
-        raise Error::AuthError, 'voms group env variable is not set' unless hash.key?('GRST_VOMS_FQANS')
+        raise Error::AuthenticationError, 'voms group env variable is not set' unless hash.key?('GRST_VOMS_FQANS')
         groups = Hash.new([])
         hash['GRST_VOMS_FQANS'].split(';').each do |line|
           matches = line.match(VOMS_GROUP_REGEXP)

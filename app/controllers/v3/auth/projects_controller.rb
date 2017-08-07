@@ -4,7 +4,7 @@ module V3
       before_action :validate_token_header!
 
       def index
-        credentials = UnifiedCredentials.new(Tokenator.from_token(request.headers[token_header_key]))
+        credentials = UnifiedCredentials.new(Utils::Tokenator.from_token(request.headers[token_header_key]))
         credentials_projects = credentials.groups.map { |group| group[:id] }
         cloud_projects = Clouds::CloudProxy.new.projects
 

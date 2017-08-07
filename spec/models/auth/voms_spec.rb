@@ -23,7 +23,7 @@ describe Auth::Voms, type: :model do
 
       it 'will raise error' do
         expect { Auth::Voms.send(:parse_hash_dn!, dn_hash) }.to \
-          raise_error(Errors::AuthError)
+          raise_error(Errors::AuthenticationError)
       end
     end
   end
@@ -49,7 +49,7 @@ describe Auth::Voms, type: :model do
 
       it 'will raise error' do
         expect { Auth::Voms.send(:parse_hash_exp!, exp_hash) }.to \
-          raise_error(Errors::AuthError)
+          raise_error(Errors::AuthenticationError)
       end
     end
   end

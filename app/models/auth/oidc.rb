@@ -23,7 +23,7 @@ module Auth
       private
 
       def check_hash!(hash)
-        raise Errors::AuthError, 'invalid oidc credential hash' \
+        raise Errors::AuthenticationError, 'invalid oidc credential hash' \
           unless ENV_NAMES.values.all? { |key| hash.key?(key) }
       end
 

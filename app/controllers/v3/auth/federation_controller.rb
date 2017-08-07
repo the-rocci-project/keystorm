@@ -5,13 +5,13 @@ module V3
 
       def oidc
         credentials = ::Auth::Oidc.unified_credentials(ENV.select { |name| name.start_with?('OIDC') })
-        headers['X-Subject-Token'] = ::Tokenator.to_token(credentials.to_hash)
+        headers['X-Subject-Token'] = Utils::Tokenator.to_token(credentials.to_hash)
         render json: response_hash(credentials, 'oidc')
       end
 
       def voms
         credentials = ::Auth::Voms.unified_credentials(ENV.select { |name| name.start_with?('GRST', 'SSL') })
-        headers['X-Subject-Token'] = ::Tokenator.to_token(credentials.to_hash)
+        headers['X-Subject-Token'] = Utils::Tokenator.to_token(credentials.to_hash)
         render json: response_hash(credentials, 'voms')
       end
 
