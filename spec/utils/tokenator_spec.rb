@@ -10,7 +10,7 @@ describe Utils::Tokenator, type: :model do
   describe '#from_token' do
     it 'will parse token' do
       origin = described_class.to_token(name: 'John')
-      expect(described_class.from_token(origin)).to eq('name' => 'John')
+      expect(described_class.from_token(origin)).to eq(name: 'John')
     end
 
     it 'will raise error' do

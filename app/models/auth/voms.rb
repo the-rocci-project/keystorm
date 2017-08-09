@@ -41,7 +41,7 @@ module Auth
           matches = line.match(VOMS_GROUP_REGEXP)
           groups[matches[:group]] += [matches[:role]] if matches
         end
-        groups
+        groups.keys.map { |key| { id: key, roles: groups[key] } }
       end
     end
   end

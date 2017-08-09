@@ -6,13 +6,13 @@ module Utils
   class Tokenator
     class << self
       def to_token(hash)
-        encrypt(Base64.strict_encode64(hash.to_json))
+        Base64.strict_encode64(encrypt(hash.to_json))
       rescue ArgumentError, OpenSSL::Cipher::CipherError => ex
         raise Errors::AuthenticationError, "failed to tokenize hash: #{ex}"
       end
 
       def from_token(token)
-        JSON.parse(Base64.strict_decode64(decrypt(token)))
+        JSON.parse(decrypt(Base64.strict_decode64(token))).deep_symbolize_keys
       rescue ArgumentError, OpenSSL::Cipher::CipherError => ex
         raise Errors::AuthenticationError, "failed to parse data from token: #{ex}"
       end

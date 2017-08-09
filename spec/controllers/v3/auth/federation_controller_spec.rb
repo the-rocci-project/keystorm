@@ -16,24 +16,25 @@ describe V3::Auth::FederationController do
 
     let(:credentials_hash) do
       {
-        'id'             => '1',
-        'email'          => 'ben.dover@majl.ru',
-        'groups'         => { 'fedcloud.egi.eu' => ['member'] },
-        'authentication' => 'federation',
-        'name'           => 'Ben Dover',
-        'identity'       => '1',
-        'expiration'     => '123456789',
-        'issuer'         => 'gogol.com',
-        'acr'            => 'goglo.com'
+        id:              '1',
+        email:           'ben.dover@majl.ru',
+        groups:
+          [
+            {
+              id: 'fedcloud.egi.eu',
+              roles: ['member']
+            }
+          ],
+        authentication:  'federation',
+        name:            'Ben Dover',
+        identity:        '1',
+        expiration:      '123456789',
+        issuer:          'gogol.com',
+        acr:             'goglo.com'
       }
     end
 
-    let(:headers) do
-      {
-        'ACCEPT' => 'application/json',
-        'CONTENT_TYPE' => 'application/json'
-      }
-    end
+    let(:headers) { JSON_HEADERS }
 
     before do
       stub_const('ENV', ENV.to_hash.merge(oidc_env))
