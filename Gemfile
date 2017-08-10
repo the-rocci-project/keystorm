@@ -14,6 +14,7 @@ gem 'responders', '~> 2.4'
 
 group :development, :test do
   gem 'byebug'
+  gem 'json_spec'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'pry'
   gem 'pry-byebug'

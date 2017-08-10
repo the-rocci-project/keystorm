@@ -1,0 +1,12 @@
+{
+  "is_domain":false,
+  "description":"",
+  "links":{
+    "self":""
+  },
+  "enabled":true,
+  "id":"test01",
+  "parent_id":"",
+  "domain_id":"",
+  "name":"test01"
+}
