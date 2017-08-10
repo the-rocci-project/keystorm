@@ -13,7 +13,9 @@ module Authenticable
     end
   end
 
+  delegate :token_header_key, to: :class
+
   def validate_token_header!
-    raise Errors::AuthenticationError, 'No token provided' unless request.headers.include? self.class.token_header_key
+    raise Errors::AuthenticationError, 'No token provided' unless request.headers.include? token_header_key
   end
 end
