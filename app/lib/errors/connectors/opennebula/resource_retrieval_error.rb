@@ -1,7 +1,7 @@
 module Errors
   module Connectors
     module Opennebula
-      class ResourceRetrievalError < OpennebulaError; end
+      class ResourceRetrievalError < ConnectorError; end
     end
   end
 end

@@ -1,7 +1,7 @@
 module Errors
   module Connectors
     module Opennebula
-      class ApiCallTimeoutError < ConnectorError; end
+      class ConnectorError < Errors::Connectors::ConnectorError; end
     end
   end
 end
