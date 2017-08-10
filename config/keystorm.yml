@@ -6,8 +6,8 @@ defaults: &defaults
     api-call-timeout: 3h
   log_level: debug
   token_cipher: AES-128-CBC
-  token_key: abcdefghijklmnopqrstuvwxyz
-  token_iv: zyxwvutsrqponmlkjihgfedcba
+  token_key: abcdefghijklmnop
+  token_iv: zyxwvutsrqponmlk
   oidc:
     matcher: urn:mace:egi.eu:aai.egi.eu:{role}@{group}
   voms:
