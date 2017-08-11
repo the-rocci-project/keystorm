@@ -1,7 +1,7 @@
 module Errors
   module Connectors
     module Opennebula
-      class UserNotAuthorizedError < OpennebulaError; end
+      class UserNotAuthorizedError < ConnectorError; end
     end
   end
 end

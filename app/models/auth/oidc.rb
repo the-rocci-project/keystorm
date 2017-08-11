@@ -23,7 +23,7 @@ module Auth
       private
 
       def check_hash!(hash)
-        raise Errors::AuthError, 'invalid oidc credential hash' \
+        raise Errors::AuthenticationError, 'invalid oidc credential hash' \
           unless ENV_NAMES.values.all? { |key| hash.key?(key) }
       end
 
@@ -34,7 +34,7 @@ module Auth
           matches = line.match(regexp)
           groups[matches[:group]] += [matches[:role]] if matches
         end
-        groups
+        groups.map { |key, value| { id: key, roles: value } }
       end
 
       def group_regexp

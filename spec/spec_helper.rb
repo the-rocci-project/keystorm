@@ -19,6 +19,17 @@ require 'vcr'
 
 MOCK_DIR = File.join(File.dirname(__FILE__), 'mock')
 
+def load_token(filename)
+  File.read(File.join(MOCK_DIR, 'tokens', filename)).strip
+end
+
+def load_response(filename, hash: false)
+  response = File.read(File.join(MOCK_DIR, 'responses', filename))
+  response = JSON.parse(response).deep_symbolize_keys if hash
+
+  response
+end
+
 WebMock.disable_net_connect!(allow_localhost: true)
 
 VCR.configure do |config|

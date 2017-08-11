@@ -1,12 +1,13 @@
 defaults: &defaults
+  cloud: opennebula
   opennebula:
     endpoint: http://localhost:2633/RPC2
     secret: oneadmin:opennebula
     api-call-timeout: 3h
   log_level: debug
   token_cipher: AES-128-CBC
-  token_key: bbbbbbbbbbbbbbbb
-  token_iv: aaaaaaaaaaaaaaaa
+  token_key: abcdefghijklmnop
+  token_iv: zyxwvutsrqponmlk
   oidc:
     matcher: urn:mace:egi.eu:aai.egi.eu:{role}@{group}
   voms:

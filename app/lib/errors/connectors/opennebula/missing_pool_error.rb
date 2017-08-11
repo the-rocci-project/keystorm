@@ -1,7 +1,7 @@
 module Errors
   module Connectors
     module Opennebula
-      class MissingPoolError < OpennebulaError; end
+      class MissingPoolError < ConnectorError; end
     end
   end
 end

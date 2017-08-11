@@ -15,11 +15,7 @@ describe Auth::Oidc, type: :model do
       end
 
       it 'returns 1 groups' do
-        expect(groups.keys.size).to eq(1)
-      end
-
-      it 'returns good group' do
-        expect(groups['fedcloud.egi.eu']).to eq(%w[vm_operator member])
+        expect(groups.size).to eq(1)
       end
     end
 
@@ -36,7 +32,7 @@ describe Auth::Oidc, type: :model do
       end
 
       it 'returns 0 groups' do
-        expect(groups.keys.size).to eq(0)
+        expect(groups.size).to eq(0)
       end
     end
   end

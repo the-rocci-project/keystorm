@@ -1,7 +1,7 @@
 module Errors
   module Connectors
     module Opennebula
-      class OpennebulaError < StandardError; end
+      class ServiceError < Errors::Connectors::ServiceError; end
     end
   end
 end
