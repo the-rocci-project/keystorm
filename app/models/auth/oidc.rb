@@ -34,7 +34,7 @@ module Auth
           matches = line.match(regexp)
           groups[matches[:group]] += [matches[:role]] if matches
         end
-        groups.keys.map { |key| { id: key, roles: groups[key] } }
+        groups.map { |key, value| { id: key, roles: value } }
       end
 
       def group_regexp
