@@ -10,7 +10,7 @@ module Auth
         UnifiedCredentials.new(id: Digest::SHA256.hexdigest(dn),
                                email: Rails.configuration.keystorm['voms']['default_email'],
                                groups: parse_hash_groups!(hash),
-                               authentication: 'federation',
+                               authentication: { type: 'federation', method: 'voms' },
                                name: dn,
                                identity: dn,
                                expiration: parse_hash_exp!(hash))
