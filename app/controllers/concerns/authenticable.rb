@@ -2,20 +2,26 @@ module Authenticable
   extend ActiveSupport::Concern
 
   # Header token const
-  TOKEN_HEADER_KEY = 'X-Auth-Token'.freeze
+  X_AUTH_TOKEN_HEADER_KEY = 'X-Auth-Token'.freeze
+  X_SUBJECT_TOKEN_HEADER_KEY = 'X-Subject-Token'.freeze
 
   class_methods do
     # Returns HTTP header key for token.
     #
     # @return [String] header key for token
-    def token_header_key
-      TOKEN_HEADER_KEY
+    def x_auth_token_header_key
+      X_AUTH_TOKEN_HEADER_KEY
+    end
+
+    def x_subject_token_header_key
+      X_SUBJECT_TOKEN_HEADER_KEY
     end
   end
 
-  delegate :token_header_key, to: :class
+  delegate :x_auth_token_header_key, to: :class
+  delegate :x_subject_token_header_key, to: :class
 
   def validate_token_header!
-    raise Errors::AuthenticationError, 'No token provided' unless request.headers.include? token_header_key
+    raise Errors::AuthenticationError, 'No token provided' unless request.headers.include? x_auth_token_header_key
   end
 end

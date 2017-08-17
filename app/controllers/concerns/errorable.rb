@@ -4,6 +4,7 @@ module Errorable
   included do
     rescue_from Errors::FormatError, ActionController::UnknownFormat, with: :handle_format_error
     rescue_from Errors::AuthenticationError, with: :handle_authentication_error
+    rescue_from Errors::RequestError, with: :handle_request_error
     rescue_from Errors::Connectors::ConnectorError, with: :handle_connector_error
     rescue_from Errors::Connectors::ServiceError, with: :handle_service_error
   end
@@ -34,5 +35,9 @@ module Errorable
 
   def handle_format_error
     render nothing: true, status: :not_acceptable
+  end
+
+  def handle_request_error(ex)
+    render_error :bad_request, ex.message
   end
 end
