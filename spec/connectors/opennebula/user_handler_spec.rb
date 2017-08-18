@@ -55,4 +55,25 @@ describe Connectors::Opennebula::UserHandler do
       expect(handler.find_by_name(username)).to be_truthy
     end
   end
+
+  describe '.update', :vcr do
+    let(:user) { handler.find_by_name 'bandicoot' }
+    let(:template) { '"SPEC_ATTRIBUTE" = "spec_value"' }
+
+    it 'updates user\'s information' do
+      handler.update(user, template)
+      user.info
+      expect(user['TEMPLATE/SPEC_ATTRIBUTE']).to eq('spec_value')
+    end
+  end
+
+  describe '.token', :vcr do
+    let(:username) { 'bandicoot' }
+    let(:group) { Connectors::Opennebula::GroupHandler.new.find_by_name 'group01' }
+    let(:expiration) { (Time.zone.now + 1.month).to_i }
+
+    it 'requests an auth token' do
+      expect(handler.token(username, group, expiration)).not_to be_empty
+    end
+  end
 end
