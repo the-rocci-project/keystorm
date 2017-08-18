@@ -7,7 +7,7 @@ module RoutingConstraints
     end
 
     def methods
-      @params.dig(:auth, :identity).fetch(:methods, [])
+      @params.dig(:auth, :identity, :methods) || []
     end
   end
 end
