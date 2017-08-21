@@ -39,7 +39,7 @@ module Auth
         groups = Hash.new([])
         hash['GRST_VOMS_FQANS'].split(';').each do |line|
           matches = line.match(VOMS_GROUP_REGEXP)
-          groups[matches[:group]] += [matches[:role]] if matches
+          groups[matches[:group]] += [matches[:role]] if matches && matches[:role] != 'NULL'
         end
         groups.map { |key, value| { id: key, roles: value } }
       end
