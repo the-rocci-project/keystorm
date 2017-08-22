@@ -15,8 +15,7 @@ module Connectors
       alias list find_all
 
       def create(username, password, auth, group)
-        user_alloc = OpenNebula::User.build_xml
-        user = OpenNebula::User.new(user_alloc, client)
+        user = OpenNebula::User.new(OpenNebula::User.build_xml, client)
 
         handle_opennebula_error do
           user.allocate(username, password, auth)
@@ -38,8 +37,7 @@ module Connectors
       end
 
       def token(username, group, expiration)
-        user_alloc = OpenNebula::User.build_xml
-        user = OpenNebula::User.new(user_alloc, client)
+        user = OpenNebula::User.new(OpenNebula::User.build_xml, client)
 
         handle_opennebula_error { user.login(username, '', (expiration - Time.now.to_i), group.id) }
       end
