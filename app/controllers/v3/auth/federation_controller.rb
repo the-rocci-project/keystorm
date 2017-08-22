@@ -5,11 +5,11 @@ module V3
       include TokenRespondable
 
       def oidc
-        auth_response(::Auth::Oidc, 'OIDC')
+        auth_response ::Auth::Oidc, 'OIDC'
       end
 
       def voms
-        auth_response(::Auth::Voms, 'SSL', 'GRST')
+        auth_response ::Auth::Voms, 'SSL', 'GRST'
       end
 
       private
