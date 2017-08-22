@@ -4,6 +4,8 @@ module V3
       include Timestampable
       include TokenRespondable
 
+      attr_reader :credentials
+
       def oidc
         auth_response ::Auth::Oidc, 'OIDC'
       end
@@ -16,7 +18,7 @@ module V3
 
       def auth_response(type, *filters)
         @credentials = type.unified_credentials(ENV.select { |name| name.start_with?(*filters) })
-        headers[x_subject_token_header_key] = Utils::Tokenator.to_token(@credentials.to_hash)
+        headers[x_subject_token_header_key] = Utils::Tokenator.to_token(credentials.to_hash)
         respond_with token_response
       end
     end

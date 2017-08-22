@@ -5,11 +5,13 @@ module V3
       include Timestampable
       include TokenRespondable
 
+      attr_reader :credentials, :cloud, :project_id, :domain, :roles, :project, :catalog
+
       before_action :prepare_data, :validate_project!, :prepare_response_data
 
       def create
-        @cloud.autocreate @credentials, @project_id
-        cloud_token = @cloud.token @credentials.id, @project_id, @credentials.expiration
+        cloud.autocreate credentials, project_id
+        cloud_token = cloud.token credentials.id, project_id, credentials.expiration
 
         respond cloud_token
       end
@@ -24,7 +26,7 @@ module V3
       end
 
       def validate_project!
-        raise Errors::RequestError, "No project with name #{@project_id.inspect} found" unless available_projects.include? @project_id
+        raise Errors::RequestError, "No project with name #{project_id.inspect} found" unless available_projects.include? project_id
       end
 
       def prepare_response_data
@@ -44,7 +46,7 @@ module V3
       end
 
       def methods
-        ['token', @credentials.authentication[:method]]
+        ['token', credentials.authentication[:method]]
       end
     end
   end

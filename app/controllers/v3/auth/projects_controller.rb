@@ -4,6 +4,8 @@ module V3
       include ProjectsAccessible
       include ProjectsRespondable
 
+      attr_reader :credentials, :cloud
+
       before_action :validate_token_header!
 
       def index

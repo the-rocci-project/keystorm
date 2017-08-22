@@ -8,7 +8,7 @@ module TokenRespondable
       issued_at: timestamp(Time.zone.now),
       methods: methods,
       audit_ids: [],
-      expires_at: timestamp(@credentials.expiration),
+      expires_at: timestamp(credentials.expiration),
       user: user_hash
     }
     add_aditional_fields! hash
@@ -17,14 +17,14 @@ module TokenRespondable
   end
 
   def add_aditional_fields!(hash)
-    hash[:is_domain] = @domain unless @domain.nil?
-    hash[:roles] = @roles unless @roles.nil?
-    hash[:project] = @project unless @project.nil?
-    hash[:catalog] = @catalog unless @catalog.nil?
+    hash[:is_domain] = domain if respond_to? :domain
+    hash[:roles] = roles if respond_to? :roles
+    hash[:project] = project if respond_to? :project
+    hash[:catalog] = catalog if respond_to? :catalog
   end
 
   def methods
-    @credentials.authentication[:method]
+    credentials.authentication[:method]
   end
 
   def user_hash
@@ -33,8 +33,8 @@ module TokenRespondable
         id: 'Federated',
         name: 'Federated'
       },
-      id: Digest::SHA1.hexdigest(@credentials.id),
-      name: @credentials.id,
+      id: Digest::SHA1.hexdigest(credentials.id),
+      name: credentials.id,
       :'OS-FEDERATION' => federation_hash
     }
   end
@@ -45,14 +45,14 @@ module TokenRespondable
         id: 'egi.eu'
       },
       protocol: {
-        id: @credentials.authentication[:method]
+        id: credentials.authentication[:method]
       },
-      groups: @credentials.groups.map { |group| { id: group[:id] } }
+      groups: credentials.groups.map { |group| { id: group[:id] } }
     }
   end
 
   def roles_array
-    @credentials.groups.detect { |group| group[:id] == @project_id }[:roles].map { |role| role_hash role }
+    credentials.groups.detect { |group| group[:id] == project_id }[:roles].map { |role| role_hash role }
   end
 
   def role_hash(role)
@@ -69,8 +69,8 @@ module TokenRespondable
         id: 'default',
         name: 'Default'
       },
-      id: @project_id,
-      name: @project_id
+      id: project_id,
+      name: project_id
     }
   end
 
