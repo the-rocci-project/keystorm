@@ -27,6 +27,8 @@ Rails/DynamicFindBy:
     - 'app/lib/connectors/opennebula/*.rb'
     - 'spec/connectors/opennebula/*.rb'
     - 'app/models/clouds/opennebula.rb'
+    - 'spec/models/clouds/opennebula_spec.rb'
+    - 'spec/controllers/v3/auth/tokens_controller_spec.rb'
 
 Metrics/BlockLength:
   Exclude:

@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe V3::Auth::FederationController do
+  it_behaves_like 'timestampable'
+
   describe 'GET #oidc', type: :request do
     let(:oidc_env) do
       {

@@ -1,0 +1,17 @@
+{
+  "auth":{
+    "identity":{
+      "methods":[
+        "token"
+      ],
+      "token":{
+        "id":"i0MSsIfzUF9ySbiZZGk0T7GJeA1ZcC7wLK1Bl9U8Z75hZVS/PVowRUd4wOnIiJQxc1Qze2fmVrb9EJi4POxphVnE/fVlYISrV51f3RWRPD4YLYPktaCIGox6y/Gk1SzIgbIY3cum2CTWRV7lNvb5EcWZ7YEdct7gi33R7NqDqDEJErL3xATrsN1+jW1l2u5xAe8xbt013wOQjAOF4XKu/ZIPD1Sy+Ku1eum9repUXUKM/jbiiVW6bo5yuj+i104phI2YtR31t4RblKo3YoM8IBVMbPu+eIYCt4x3HMIcz2C0Ml9KIP3yuquBx2NP3JaAx300w7na/n3/1WbvEhd0YmiWaRvr4PAzKkmVxvxzfvjv3+B8ie1hDl59ADxrpO2l"
+      }
+    },
+    "scope":{
+      "project":{
+        "id":"test01"
+      }
+    }
+  }
+}

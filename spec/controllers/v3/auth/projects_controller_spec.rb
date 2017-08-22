@@ -7,7 +7,10 @@ describe V3::Auth::ProjectsController, :vcr, type: :controller do
 
   it_behaves_like 'acceptable' do
     let(:request_path) { v3_auth_projects_path }
+    let(:method) { :get }
   end
+
+  it_behaves_like 'project_accessible'
 
   describe 'GET index', type: :request do
     let(:token) { load_token 'token01.base64' }

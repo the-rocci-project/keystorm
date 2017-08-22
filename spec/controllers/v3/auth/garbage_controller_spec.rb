@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe V3::Auth::GarbageController, type: :controller do
+  it_behaves_like 'acceptable' do
+    let(:request_path) { v3_auth_tokens_path }
+    let(:method) { :post }
+  end
+
   let(:headers) { JSON_HEADERS }
 
   describe 'POST create', type: :request do
