@@ -15,7 +15,7 @@ module Auth
       def unified_credentials(hash)
         check_hash!(hash)
         uc_hash = ENV_NAMES.map { |key, value| [key, hash[value]] }.to_h
-        uc_hash[:authentication] = 'federation'
+        uc_hash[:authentication] = { type: 'federation', method: 'oidc' }
         uc_hash[:groups] = parse_hash_groups(hash)
         UnifiedCredentials.new(uc_hash)
       end
@@ -28,11 +28,11 @@ module Auth
       end
 
       def parse_hash_groups(hash)
-        groups = Hash.new([])
+        groups = Hash.new { |h, k| h[k] = [] }
         regexp = group_regexp
         hash[ENV_NAMES[:groups]].split(';').each do |line|
           matches = line.match(regexp)
-          groups[matches[:group]] += [matches[:role]] if matches
+          groups[matches[:group]] << matches[:role] if matches
         end
         groups.map { |key, value| { id: key, roles: value } }
       end

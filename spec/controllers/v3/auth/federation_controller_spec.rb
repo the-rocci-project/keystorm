@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe V3::Auth::FederationController do
+  it_behaves_like 'timestampable'
+
   describe 'GET #oidc', type: :request do
     let(:oidc_env) do
       {
@@ -25,7 +27,7 @@ describe V3::Auth::FederationController do
               roles: ['member']
             }
           ],
-        authentication:  'federation',
+        authentication:  { type: 'federation', method: 'oidc' },
         name:            'Ben Dover',
         identity:        '1',
         expiration:      '123456789',

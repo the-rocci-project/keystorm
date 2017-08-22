@@ -12,6 +12,16 @@ defaults: &defaults
     matcher: urn:mace:egi.eu:aai.egi.eu:{role}@{group}
   voms:
     default_email: nomail@nomail.com
+  catalog: # List of catalog entries
+    - endpoints:
+        - region_id: rOCCILand
+          url: http://rocciland.org/v1/service
+          region: rOCCILand
+          interface: public
+          id: 8d243dbd892234d1bccfbfb29f2ad947b2ae4cd2
+      type: compute
+      id: 82615421269f13b16e8744d2d84509b0c0c76de5
+      name: rOCCI
 
 production:
   <<: *defaults

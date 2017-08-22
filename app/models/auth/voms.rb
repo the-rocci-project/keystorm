@@ -10,7 +10,7 @@ module Auth
         UnifiedCredentials.new(id: Digest::SHA256.hexdigest(dn),
                                email: Rails.configuration.keystorm['voms']['default_email'],
                                groups: parse_hash_groups!(hash),
-                               authentication: 'federation',
+                               authentication: { type: 'federation', method: 'voms' },
                                name: dn,
                                identity: dn,
                                expiration: parse_hash_exp!(hash))
@@ -36,10 +36,10 @@ module Auth
 
       def parse_hash_groups!(hash)
         raise Error::AuthenticationError, 'voms group env variable is not set' unless hash.key?('GRST_VOMS_FQANS')
-        groups = Hash.new([])
+        groups = Hash.new { |h, k| h[k] = [] }
         hash['GRST_VOMS_FQANS'].split(';').each do |line|
           matches = line.match(VOMS_GROUP_REGEXP)
-          groups[matches[:group]] += [matches[:role]] if matches
+          groups[matches[:group]] << matches[:role] if matches && matches[:role] != 'NULL'
         end
         groups.map { |key, value| { id: key, roles: value } }
       end

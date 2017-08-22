@@ -30,6 +30,10 @@ def load_response(filename, hash: false)
   response
 end
 
+def load_request(filename)
+  File.read(File.join(MOCK_DIR, 'requests', filename))
+end
+
 WebMock.disable_net_connect!(allow_localhost: true)
 
 VCR.configure do |config|

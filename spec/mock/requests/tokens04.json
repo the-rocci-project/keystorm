@@ -1,0 +1,17 @@
+{
+  "auth":{
+    "identity":{
+      "methods":[
+        "token"
+      ],
+      "token":{
+        "id":"qwertyuiopasdfghjklzxcvbnm"
+      }
+    },
+    "scope":{
+      "project":{
+        "id":"group01"
+      }
+    }
+  }
+}
