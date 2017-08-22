@@ -32,4 +32,6 @@ module ProjectsRespondable
   def project_links_hash
     { self: '' }
   end
+
+  private :projects_response, :projects_hash, :project_hash, :project_links_hash
 end

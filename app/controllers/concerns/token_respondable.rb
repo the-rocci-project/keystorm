@@ -73,4 +73,6 @@ module TokenRespondable
       name: @project_id
     }
   end
+
+  private :token_response, :add_aditional_fields!, :methods, :user_hash, :federation_hash, :roles_array, :role_hash, :project_hash
 end
