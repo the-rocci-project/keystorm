@@ -5,14 +5,19 @@ require 'openssl'
 module Utils
   class Tokenator
     class << self
-      def to_token(hash)
-        Base64.strict_encode64(encrypt(hash.to_json))
+      def to_token(data)
+        raise ArgumentError, 'cannot tokenize nil' unless data
+        msg = data.is_a?(String) ? data : data.to_json
+        Base64.strict_encode64(encrypt(msg))
       rescue ArgumentError, OpenSSL::Cipher::CipherError => ex
-        raise Errors::AuthenticationError, "failed to tokenize hash: #{ex}"
+        raise Errors::AuthenticationError, "failed to tokenize data: #{ex}"
       end
 
-      def from_token(token)
-        JSON.parse(decrypt(Base64.strict_decode64(token))).deep_symbolize_keys
+      def from_token(token, parse: true)
+        raise ArgumentError, 'cannot parse token data from nil' unless token
+        data = decrypt(Base64.strict_decode64(token))
+        return data unless parse
+        JSON.parse(data).deep_symbolize_keys
       rescue ArgumentError, OpenSSL::Cipher::CipherError => ex
         raise Errors::AuthenticationError, "failed to parse data from token: #{ex}"
       end
