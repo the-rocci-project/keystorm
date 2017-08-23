@@ -19,6 +19,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-byebug'
   gem 'rails_best_practices'
+  gem 'rantly'
   gem 'rspec-rails', '~> 3.5'
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
