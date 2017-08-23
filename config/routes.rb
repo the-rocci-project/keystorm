@@ -7,11 +7,7 @@ Rails.application.routes.draw do
         get 'oidc', on: :collection
         get 'voms', on: :collection
       end
-      resources :tokens, only: [:create], constraints: RoutingConstraints::TokensConstraint.new('token')
-      resources :tokens, only: [], controller: 'local', constraints: RoutingConstraints::TokensConstraint.new('password')
-      resources :tokens, only: [:create],
-                         controller: 'garbage',
-                         constraints: RoutingConstraints::GarbageConstraint.new(%w[token password])
+      resources :tokens, only: [:create]
     end
   end
 end
