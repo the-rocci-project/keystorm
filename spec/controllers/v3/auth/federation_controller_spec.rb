@@ -44,7 +44,7 @@ describe V3::Auth::FederationController do
 
     it 'will be succesful' do
       get oidc_v3_auth_federation_index_path, headers: headers
-      expect(response).to be_success
+      expect(response).to have_http_status :success
     end
 
     it 'will have X-Subject-Token set' do

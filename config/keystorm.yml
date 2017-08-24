@@ -8,6 +8,7 @@ defaults: &defaults
   token_cipher: AES-128-CBC
   token_key: abcdefghijklmnop
   token_iv: zyxwvutsrqponmlk
+  memcache: localhost:11211
   oidc:
     matcher: urn:mace:egi.eu:aai.egi.eu:{role}@{group}
   voms:
