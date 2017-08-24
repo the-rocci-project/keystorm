@@ -26,6 +26,9 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  config.force_ssl = true
+
   # Don't care if the mailer can't send.
   # config.action_mailer.raise_delivery_errors = false
 
@@ -37,6 +40,8 @@ Rails.application.configure do
   config.logstasher.enabled = true
   config.logstasher.suppress_app_log = false
   config.logstasher.source = 'keystorm'
+  config.cache_store = :dalli_store, config.keystorm['memcache'],
+                       { namespace: 'keystorm.development', expires_in: 1.minute, compress: true }
 
   # Raise an error on page load if there are pending migrations.
   # config.active_record.migration_error = :page_load

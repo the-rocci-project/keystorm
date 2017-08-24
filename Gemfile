@@ -5,8 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'dalli', '~> 2.7'
 gem 'logstasher', '~> 1.2'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.10'
 gem 'rack-attack', '~> 5.0.1'
 gem 'rack-cors', '~> 0.4'
 gem 'rails', '~> 5.1.2'

@@ -45,6 +45,8 @@ Rails.application.configure do
   config.logstasher.enabled = true
   config.logstasher.suppress_app_log = false
   config.logstasher.source = 'keystorm'
+  config.cache_store = :dalli_store, config.keystorm['memcache'],
+                       { namespace: 'keystorm.production', expires_in: 1.minute, compress: true }
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
