@@ -6,20 +6,24 @@ module Errorable
       render nothing: true, status: :not_acceptable
     end
 
-    rescue_from Errors::AuthenticationError do
-      render_error :unauthorized, 'Not Authorized'
+    rescue_from Errors::AuthenticationError do |ex|
+      log_message! ex
+      render_error :unauthorized, 'Not authorized to access requested content'
     end
 
     rescue_from Errors::RequestError do |ex|
+      log_message! ex
       render_error :bad_request, ex.message
     end
 
     rescue_from Errors::Connectors::ConnectorError do |ex|
-      render_error :internal_server_error, ex.message
+      log_message! ex
+      render_error :internal_server_error, 'Underlying cloud platform failed to complete request'
     end
 
     rescue_from Errors::Connectors::ServiceError do |ex|
-      render_error :service_unavailable, ex.message
+      log_message! ex, :fatal
+      render_error :service_unavailable, 'Cloud platform is temporarily unavailable'
     end
   end
 
@@ -30,5 +34,9 @@ module Errorable
   # @param message [String] response message
   def render_error(code, message)
     respond_with Utils::RenderableError.new(code, message), status: code
+  end
+
+  def log_message!(exception, level = :error)
+    logger.send(level) { "#{exception.class}: #{exception}" }
   end
 end

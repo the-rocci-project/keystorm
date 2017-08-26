@@ -12,6 +12,7 @@ module Clouds
 
     def initialize_cloud
       cloud_type = Rails.configuration.keystorm['cloud'].to_sym
+      Rails.logger.debug { "Initializing cloud proxy of type #{cloud_type.inspect}" }
       validate_class! cloud_type
       CLOUD_TYPES[cloud_type].new
     end

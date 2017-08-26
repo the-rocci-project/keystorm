@@ -13,6 +13,7 @@ module Auth
       }.freeze
 
       def unified_credentials(hash)
+        Rails.logger.debug { "Building OIDC unified credentials from #{hash.inspect}" }
         check_hash!(hash)
         uc_hash = ENV_NAMES.map { |key, value| [key, hash[value]] }.to_h
         uc_hash[:authentication] = { type: 'federation', method: 'oidc' }

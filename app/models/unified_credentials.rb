@@ -4,6 +4,7 @@ class UnifiedCredentials
               :acr
 
   def initialize(args = {})
+    Rails.logger.debug { "Initializing unified credentials: #{args.inspect}" }
     @id = args.fetch(:id)
     @email = args.fetch(:email)
     @groups = args.fetch(:groups)
