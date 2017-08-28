@@ -39,7 +39,7 @@ module Connectors
       def token(username, group, expiration)
         user = OpenNebula::User.new(OpenNebula::User.build_xml, client)
 
-        handle_opennebula_error { user.login(username, '', (expiration - Time.now.to_i), group.id) }
+        handle_opennebula_error { user.login(username, '', (expiration.to_i - Time.now.to_i), group.id) }
       end
     end
   end
