@@ -14,9 +14,9 @@ describe Connectors::Opennebula::GroupHandler do
   end
 
   describe '.list', :vcr do
-    it 'returns all groups (other than excluded)' do
+    it 'returns all groups that have correct flag and are not excluded' do
       groups = handler.list
-      expect(groups.count).to eq(4)
+      expect(groups.count).to eq(2)
     end
   end
 end
