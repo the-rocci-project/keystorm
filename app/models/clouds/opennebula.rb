@@ -24,7 +24,7 @@ module Clouds
 
     def token(username, groupname, expiration)
       group = group_handler.find_by_name(groupname)
-      token = user_handler.token(username, group, expiration)
+      token = "#{username}:#{user_handler.token(username, group, expiration)}"
       Rails.logger.debug do
         "Generating OpenNebula token for user #{username.inspect} " \
         "and group #{groupname.inspect} with expiration #{expiration.inspect}: #{token.inspect}"

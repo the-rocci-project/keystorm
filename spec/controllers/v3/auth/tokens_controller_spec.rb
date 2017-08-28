@@ -62,7 +62,7 @@ describe V3::Auth::TokensController, :vcr, type: :controller do
       it 'sets a valid token as header' do
         keystorm_token = response.headers['X-Subject-Token']
         cloud_token = Utils::Tokenator.from_token keystorm_token, parse: false
-        expect(cloud_token).to eq(Connectors::Opennebula::UserHandler.new.find_by_name('aaa')['LOGIN_TOKEN/TOKEN'])
+        expect(cloud_token).to eq("aaa:#{Connectors::Opennebula::UserHandler.new.find_by_name('aaa')['LOGIN_TOKEN/TOKEN']}")
       end
     end
   end
