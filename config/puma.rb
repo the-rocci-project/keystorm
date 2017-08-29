@@ -9,11 +9,9 @@ threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
-defaults_dir = File.dirname(__FILE__)
-ssl_bind ENV.fetch('HOST') { '127.0.0.1' },
-         ENV.fetch('PORT') { 3000 },
-         key: ENV.fetch('HOST_KEY') { File.join(defaults_dir, 'snakeoil.key') },
-         cert: ENV.fetch('HOST_CERT') { File.join(defaults_dir, 'snakeoil.cert') }
+puma_host = ENV.fetch('HOST') { '127.0.0.1' }
+puma_port = ENV.fetch('PORT') { 3000 }
+bind ENV.fetch('BIND') { "tcp://#{puma_host}:#{puma_port}" }
 
 # Specifies the `environment` that Puma will run in.
 #
