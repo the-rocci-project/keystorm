@@ -1,18 +1,17 @@
 defaults: &defaults
-  cloud: opennebula
+  cloud: <%= ENV['KEYSTORM_CLOUD'] || 'opennebula' %>
   opennebula:
-    endpoint: http://localhost:2633/RPC2
-    secret: oneadmin:opennebula
-    api-call-timeout: 3h
-  log_level: debug
-  token_cipher: AES-128-CBC
-  token_key: abcdefghijklmnop
-  token_iv: zyxwvutsrqponmlk
-  memcache: localhost:11211
+    endpoint: <%= ENV['KEYSTORM_OPENNEBULA_ENDPOINT'] || 'http://localhost:2633/RPC2' %>
+    secret: <%= ENV['KEYSTORM_OPENNEBULA_SECRET'] || 'oneadmin:opennebula' %>
+  log_level: <%= ENV['KEYSTORM_LOG_LEVEL'] || 'info' %>
+  token_cipher: <%= ENV['KEYSTORM_TOKEN_CIPHER'] || 'AES-128-CBC' %>
+  token_key: <%= ENV['KEYSTORM_TOKEN_KEY'] || 'abcdefghijklmnop' %>
+  token_iv: <%= ENV['KEYSTORM_TOKEN_IV'] || 'zyxwvutsrqponmlk' %>
+  memcache: <%= ENV['KEYSTORM_MEMCACHE'] || 'localhost:11211' %>
   oidc:
-    matcher: urn:mace:egi.eu:aai.egi.eu:{role}@{group}
+    matcher: <%= ENV['KEYSTORM_OIDC_MATCHER'] || 'urn:mace:egi.eu:aai.egi.eu:{role}@{group}' %>
   voms:
-    default_email: nomail@nomail.com
+    default_email: <%= ENV['KEYSTORM_VOMS_DEFAULT_EMAIL'] || 'nomail@nomail.com' %>
   catalog: # List of catalog entries
     - endpoints:
         - region_id: rOCCILand
@@ -30,6 +29,7 @@ production:
 
 development:
   <<: *defaults
+  log_level: debug
 
 test:
   <<: *defaults
