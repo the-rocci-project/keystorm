@@ -7,7 +7,7 @@ module Errorable
     end
 
     rescue_from Errors::AuthenticationError do |ex|
-      log_message! ex
+      log_message! ex, :warn
       render_error :unauthorized, 'Not authorized to access requested content'
     end
 

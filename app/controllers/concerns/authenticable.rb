@@ -24,4 +24,9 @@ module Authenticable
   def validate_token_header!
     raise Errors::AuthenticationError, 'No token provided' unless request.headers.include? x_auth_token_header_key
   end
+
+  def validate_expiration!
+    raise Errors::AuthenticationError, 'Token is expired' \
+      if credentials.expiration.to_i - Time.now.to_i <= 0
+  end
 end

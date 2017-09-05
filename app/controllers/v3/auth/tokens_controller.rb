@@ -10,7 +10,7 @@ module V3
 
       attr_reader :credentials, :cloud, :project_id, :domain, :roles, :project, :catalog
 
-      before_action :prepare_data, :validate_project!, :prepare_response_data
+      before_action :prepare_data, :validate_project!, :prepare_response_data, :validate_expiration!
       after_action :audit_scoped_token
 
       def create

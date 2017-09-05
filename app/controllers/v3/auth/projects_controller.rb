@@ -6,12 +6,17 @@ module V3
 
       attr_reader :credentials, :cloud
 
-      before_action :validate_token_header!
+      before_action :prepare_data, :validate_token_header!, :validate_expiration!
 
       def index
-        @credentials = UnifiedCredentials.new(Utils::Tokenator.from_token(request.headers[x_auth_token_header_key]))
         @cloud = Clouds::CloudProxy.new
         respond_with projects_response
+      end
+
+      private
+
+      def prepare_data
+        @credentials = UnifiedCredentials.new(Utils::Tokenator.from_token(request.headers[x_auth_token_header_key]))
       end
     end
   end
