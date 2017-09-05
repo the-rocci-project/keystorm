@@ -1,6 +1,9 @@
+require 'digest'
+
 module V3
   module Auth
     class TokensController < ApplicationController
+      include Auditable
       include ProjectsAccessible
       include Timestampable
       include TokenRespondable
@@ -8,12 +11,13 @@ module V3
       attr_reader :credentials, :cloud, :project_id, :domain, :roles, :project, :catalog
 
       before_action :prepare_data, :validate_project!, :prepare_response_data
+      after_action :audit_scoped_token
 
       def create
         cloud.autocreate credentials, project_id
-        cloud_token = cloud.token credentials.id, project_id, credentials.expiration
+        @cloud_token = cloud.token credentials.id, project_id, credentials.expiration
 
-        respond cloud_token
+        respond @cloud_token
       end
 
       private

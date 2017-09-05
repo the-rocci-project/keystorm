@@ -34,6 +34,7 @@ Rails.application.configure do
   # ActionMailer::Base.deliveries array.
   # config.action_mailer.delivery_method = :test
 
+  config.x.audit = Logger.new('/dev/null')
   config.log_level = config.keystorm['log_level'].to_sym
 
   config.logstasher.enabled = true
