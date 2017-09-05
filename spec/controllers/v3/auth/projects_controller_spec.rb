@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe V3::Auth::ProjectsController, :vcr, type: :controller do
+  before do
+    allow(Time).to receive(:now).and_return(Time.zone.at(1_493_118_324))
+  end
+
   it_behaves_like 'authenticable' do
     let(:request_path) { v3_auth_projects_path }
   end
@@ -69,6 +73,14 @@ describe V3::Auth::ProjectsController, :vcr, type: :controller do
 
       it 'returns response with correct project (2)' do
         expect(response.body).to include_json(load_response('projects02.json')).at_path('projects')
+      end
+
+      context 'with expired token' do
+        let(:token) { load_token 'token04.base64' }
+
+        it 'returns response error' do
+          expect(response).to have_http_status :unauthorized
+        end
       end
     end
   end
