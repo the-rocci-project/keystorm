@@ -27,4 +27,6 @@ class UnifiedCredentials
       issuer: @issuer,
       acr: @acr }
   end
+
+  delegate :to_s, to: :to_hash
 end

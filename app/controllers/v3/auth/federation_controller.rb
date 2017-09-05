@@ -1,10 +1,13 @@
 module V3
   module Auth
     class FederationController < ApplicationController
+      include Auditable
       include Timestampable
       include TokenRespondable
 
       attr_reader :credentials
+
+      after_action :audit_unscoped_token
 
       def oidc
         auth_response ::Auth::Oidc, 'OIDC'
