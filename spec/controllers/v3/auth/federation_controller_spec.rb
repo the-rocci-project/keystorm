@@ -36,11 +36,7 @@ describe V3::Auth::FederationController do
       }
     end
 
-    let(:headers) { JSON_HEADERS }
-
-    before do
-      stub_const('ENV', ENV.to_hash.merge(oidc_env))
-    end
+    let(:headers) { JSON_HEADERS.merge(oidc_env) }
 
     it 'will be succesful' do
       get oidc_v3_auth_federation_index_path, headers: headers

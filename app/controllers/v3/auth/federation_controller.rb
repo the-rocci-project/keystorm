@@ -20,9 +20,19 @@ module V3
       private
 
       def auth_response(type, *filters)
-        @credentials = type.unified_credentials(ENV.select { |name| name.start_with?(*filters) })
-        headers[x_subject_token_header_key] = Utils::Tokenator.to_token(credentials.to_hash)
+        @credentials = type.unified_credentials(
+          request.headers.env.each_with_object({}) do |(key, val), hash|
+            matches = key.match(/(HTTP_)?(?<new_key>(#{filters.join('|')})[^\s]+)/)
+            hash[matches[:new_key]] = val if matches
+            hash
+          end
+        )
+        set_header
         respond_with token_response
+      end
+
+      def set_header
+        headers[x_subject_token_header_key] = Utils::Tokenator.to_token(credentials.to_hash)
       end
     end
   end
