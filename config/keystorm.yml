@@ -11,25 +11,23 @@ defaults: &defaults
   oidc:
     matcher: <%= ENV['KEYSTORM_OIDC_MATCHER'] || 'urn:mace:egi.eu:aai.egi.eu:{role}@{group}' %>
   voms:
-    default_email: <%= ENV['KEYSTORM_VOMS_DEFAULT_EMAIL'] || 'nomail@nomail.com' %>
+    default_email: <%= ENV['KEYSTORM_VOMS_DEFAULT_EMAIL'] || 'root@localhost' %>
   catalog: # List of catalog entries
     - endpoints:
-        - region_id: rOCCILand
-          url: http://rocciland.org/v1/service
-          region: rOCCILand
+        - region_id: rOCCI-server
+          url: <%= ENV['KEYSTORM_CATALOG_ENDPOINTS_URL'] || 'https://localhost:11443/' %>
+          region: rOCCI-server
           interface: public
           id: 8d243dbd892234d1bccfbfb29f2ad947b2ae4cd2
       type: compute
       id: 82615421269f13b16e8744d2d84509b0c0c76de5
-      name: rOCCI
+      name: rOCCI-server
 
 production:
   <<: *defaults
-  log_level: info
 
 development:
   <<: *defaults
-  log_level: debug
 
 test:
   <<: *defaults
