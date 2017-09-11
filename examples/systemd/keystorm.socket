@@ -1,0 +1,12 @@
+[Unit]
+Description="Keystorm HTTPS Accept Socket"
+
+[Socket]
+# ListenStream=0.0.0.0:5000
+ListenStream=127.0.0.1:5000
+NoDelay=true
+ReusePort=true
+Backlog=1024
+
+[Install]
+WantedBy=sockets.target

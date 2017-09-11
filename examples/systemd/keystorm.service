@@ -1,0 +1,21 @@
+[Unit]
+Description="Keystorm HTTPS Service"
+After=network.target
+Requires=keystorm.socket
+Requires=memcached.service
+
+[Service]
+Type=simple
+User=keystorm
+Group=keystorm
+PrivateTmp=true
+Restart=always
+
+# ExecStart="bin/bundle exec --keep-file-descriptors puma"
+# WorkingDirectory=/opt/keystorm
+
+ExecStart="/opt/keystorm/bin/keystorm"
+WorkingDirectory=/opt/keystorm/embedded/app/keystorm
+
+[Install]
+WantedBy=multi-user.target
