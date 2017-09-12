@@ -39,19 +39,36 @@ describe V3::Auth::FederationController do
         }
       end
 
-      it 'will be succesful' do
-        get oidc_v3_auth_federation_index_path, headers: headers
-        expect(response).to have_http_status :success
+      context 'behind proxy' do
+        before do
+          Rails.configuration.keystorm['behind_proxy'] = true
+        end
+
+        it 'fail' do
+          get oidc_v3_auth_federation_index_path, headers: headers
+          expect(response).to have_http_status :unauthorized
+        end
       end
 
-      it 'will have X-Subject-Token set' do
-        get oidc_v3_auth_federation_index_path, headers: headers
-        expect(response.headers['X-Subject-Token']).not_to be_nil
-      end
+      context 'not behind proxy' do
+        before do
+          Rails.configuration.keystorm['behind_proxy'] = false
+        end
 
-      it 'will have correct token set' do
-        get oidc_v3_auth_federation_index_path, headers: headers
-        expect(Utils::Tokenator.from_token(response.headers['X-Subject-Token'])).to eq(credentials_hash)
+        it 'will be succesful' do
+          get oidc_v3_auth_federation_index_path, headers: headers
+          expect(response).to have_http_status :success
+        end
+
+        it 'will have X-Subject-Token set' do
+          get oidc_v3_auth_federation_index_path, headers: headers
+          expect(response.headers['X-Subject-Token']).not_to be_nil
+        end
+
+        it 'will have correct token set' do
+          get oidc_v3_auth_federation_index_path, headers: headers
+          expect(Utils::Tokenator.from_token(response.headers['X-Subject-Token'])).to eq(credentials_hash)
+        end
       end
     end
 
@@ -68,19 +85,36 @@ describe V3::Auth::FederationController do
         }
       end
 
-      it 'will be succesful' do
-        get oidc_v3_auth_federation_index_path, headers: headers
-        expect(response).to have_http_status :success
+      context 'behind proxy' do
+        before do
+          Rails.configuration.keystorm['behind_proxy'] = true
+        end
+
+        it 'will be succesful' do
+          get oidc_v3_auth_federation_index_path, headers: headers
+          expect(response).to have_http_status :success
+        end
+
+        it 'will have X-Subject-Token set' do
+          get oidc_v3_auth_federation_index_path, headers: headers
+          expect(response.headers['X-Subject-Token']).not_to be_nil
+        end
+
+        it 'will have correct token set' do
+          get oidc_v3_auth_federation_index_path, headers: headers
+          expect(Utils::Tokenator.from_token(response.headers['X-Subject-Token'])).to eq(credentials_hash)
+        end
       end
 
-      it 'will have X-Subject-Token set' do
-        get oidc_v3_auth_federation_index_path, headers: headers
-        expect(response.headers['X-Subject-Token']).not_to be_nil
-      end
+      context 'not behind proxy' do
+        before do
+          Rails.configuration.keystorm['behind_proxy'] = false
+        end
 
-      it 'will have correct token set' do
-        get oidc_v3_auth_federation_index_path, headers: headers
-        expect(Utils::Tokenator.from_token(response.headers['X-Subject-Token'])).to eq(credentials_hash)
+        it 'will fail' do
+          get oidc_v3_auth_federation_index_path, headers: headers
+          expect(response).to have_http_status :unauthorized
+        end
       end
     end
 
@@ -97,19 +131,26 @@ describe V3::Auth::FederationController do
         }
       end
 
-      it 'will be succesful' do
-        get oidc_v3_auth_federation_index_path, headers: headers
-        expect(response).to have_http_status :success
+      context 'behind proxy' do
+        before do
+          Rails.configuration.keystorm['behind_proxy'] = true
+        end
+
+        it 'will fail' do
+          get oidc_v3_auth_federation_index_path, headers: headers
+          expect(response).to have_http_status :unauthorized
+        end
       end
 
-      it 'will have X-Subject-Token set' do
-        get oidc_v3_auth_federation_index_path, headers: headers
-        expect(response.headers['X-Subject-Token']).not_to be_nil
-      end
+      context 'not behind proxy' do
+        before do
+          Rails.configuration.keystorm['behind_proxy'] = false
+        end
 
-      it 'will have correct token set' do
-        get oidc_v3_auth_federation_index_path, headers: headers
-        expect(Utils::Tokenator.from_token(response.headers['X-Subject-Token'])).to eq(credentials_hash)
+        it 'will fail' do
+          get oidc_v3_auth_federation_index_path, headers: headers
+          expect(response).to have_http_status :unauthorized
+        end
       end
     end
   end
