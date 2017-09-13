@@ -93,13 +93,13 @@ describe Connectors::Opennebula::Handler do
 
     context 'if element with specified id exists' do
       it 'returns true' do
-        expect(handler.exist?(105)).to be_truthy
+        expect(handler).to be_exist(105)
       end
     end
 
     context 'if there is no element with specified id' do
       it 'returns false' do
-        expect(handler.exist?(42)).to be_falsy
+        expect(handler).to be_exist(105)
       end
     end
   end
@@ -195,14 +195,11 @@ describe Connectors::Opennebula::Handler do
       before do
         handler.pool = OpenNebula::ImagePool.new handler.client
         allow(handler.pool).to receive(:info_all!)
-      end
-
-      after do
-        expect(handler.pool).to have_received(:info_all!)
-      end
-
-      it 'calls info_all! method on pool' do
         handler.send(:reload!)
+      end
+
+      it 'receives info_all! call' do
+        expect(handler.pool).to have_received(:info_all!)
       end
     end
 
@@ -210,14 +207,11 @@ describe Connectors::Opennebula::Handler do
       before do
         handler.pool = OpenNebula::DatastorePool.new handler.client
         allow(handler.pool).to receive(:info!)
-      end
-
-      after do
-        expect(handler.pool).to have_received(:info!)
-      end
-
-      it 'calls info! method on pool' do
         handler.send(:reload!)
+      end
+
+      it 'receives info! call' do
+        expect(handler.pool).to have_received(:info!)
       end
     end
   end
