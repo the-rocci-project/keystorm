@@ -195,10 +195,10 @@ describe Connectors::Opennebula::Handler do
       before do
         handler.pool = OpenNebula::ImagePool.new handler.client
         allow(handler.pool).to receive(:info_all!)
-        handler.send(:reload!)
       end
 
       it 'receives info_all! call' do
+        handler.send(:reload!)
         expect(handler.pool).to have_received(:info_all!)
       end
     end
@@ -207,10 +207,10 @@ describe Connectors::Opennebula::Handler do
       before do
         handler.pool = OpenNebula::DatastorePool.new handler.client
         allow(handler.pool).to receive(:info!)
-        handler.send(:reload!)
       end
 
       it 'receives info! call' do
+        handler.send(:reload!)
         expect(handler.pool).to have_received(:info!)
       end
     end

@@ -9,23 +9,20 @@ module V3
 
       after_action :audit_unscoped_token
 
-      OIDC_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_OIDC].freeze : %w[OIDC].freeze
-      VOMS_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_SSL HTTP_GRST].freeze : %w[SSL GRST].freeze
-
       def oidc
-        set_auth_headers(::Auth::Oidc, unify_headers(OIDC_FILTERS))
+        auth_headers(::Auth::Oidc)
         respond_with token_response
       end
 
       def voms
-        set_auth_headers(::Auth::Voms, unify_headers(VOMS_FILTERS))
+        auth_headers(::Auth::Voms)
         respond_with token_response
       end
 
       private
 
-      def set_auth_headers(type, auth_hash)
-        @credentials = type.unified_credentials(auth_hash)
+      def auth_headers(type)
+        @credentials = type.unified_credentials(unify_headers(type::HEADERS_FILTERS))
         headers[x_subject_token_header_key] = Utils::Tokenator.to_token(credentials.to_hash)
       end
 
