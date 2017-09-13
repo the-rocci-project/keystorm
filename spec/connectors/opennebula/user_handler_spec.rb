@@ -28,7 +28,7 @@ describe Connectors::Opennebula::UserHandler do
       it 'does nothing - keeps user in the group' do
         handler.add_group user, group
         user.info!
-        expect(user.groups.include?(group.id)).to be_truthy
+        expect(user.groups).to include(group.id)
       end
     end
 
@@ -39,7 +39,7 @@ describe Connectors::Opennebula::UserHandler do
       it 'adds user to specified group' do
         handler.add_group user, group
         user.info!
-        expect(user.groups.include?(group.id)).to be_truthy
+        expect(user.groups).to include(group.id)
       end
     end
   end

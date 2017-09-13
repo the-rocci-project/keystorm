@@ -2,6 +2,8 @@ require 'digest'
 
 module Auth
   class Voms
+    HEADERS_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_SSL HTTP_GRST].freeze : %w[SSL GRST].freeze
+
     class << self
       VOMS_GROUP_REGEXP = %r{^\/(?<group>[^\s]+)\/Role=(?<role>[^\s]+)\/Capability=NULL$}
 

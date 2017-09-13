@@ -10,19 +10,26 @@ module V3
       after_action :audit_unscoped_token
 
       def oidc
-        auth_response ::Auth::Oidc, 'OIDC'
+        auth_headers(::Auth::Oidc)
+        respond_with token_response
       end
 
       def voms
-        auth_response ::Auth::Voms, 'SSL', 'GRST'
+        auth_headers(::Auth::Voms)
+        respond_with token_response
       end
 
       private
 
-      def auth_response(type, *filters)
-        @credentials = type.unified_credentials(ENV.select { |name| name.start_with?(*filters) })
+      def auth_headers(type)
+        @credentials = type.unified_credentials(unify_headers(type::HEADERS_FILTERS))
         headers[x_subject_token_header_key] = Utils::Tokenator.to_token(credentials.to_hash)
-        respond_with token_response
+      end
+
+      def unify_headers(filters)
+        request.headers.env.each_with_object({}) do |(key, val), hash|
+          hash[key.gsub(/^HTTP_/, '')] = val if key.start_with?(*filters)
+        end
       end
     end
   end
