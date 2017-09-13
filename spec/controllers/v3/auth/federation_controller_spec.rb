@@ -42,6 +42,7 @@ describe V3::Auth::FederationController do
       context 'behind proxy' do
         before do
           Rails.configuration.keystorm['behind_proxy'] = true
+          stub_const('V3::Auth::FederationController::OIDC_FILTERS', ['HTTP_OIDC'])
         end
 
         it 'fail' do
@@ -53,6 +54,7 @@ describe V3::Auth::FederationController do
       context 'not behind proxy' do
         before do
           Rails.configuration.keystorm['behind_proxy'] = false
+          stub_const('V3::Auth::FederationController::OIDC_FILTERS', ['OIDC'])
         end
 
         it 'will be succesful' do
@@ -88,6 +90,7 @@ describe V3::Auth::FederationController do
       context 'behind proxy' do
         before do
           Rails.configuration.keystorm['behind_proxy'] = true
+          stub_const('V3::Auth::FederationController::OIDC_FILTERS', ['HTTP_OIDC'])
         end
 
         it 'will be succesful' do
@@ -109,6 +112,7 @@ describe V3::Auth::FederationController do
       context 'not behind proxy' do
         before do
           Rails.configuration.keystorm['behind_proxy'] = false
+          stub_const('V3::Auth::FederationController::OIDC_FILTERS', ['OIDC'])
         end
 
         it 'will fail' do
@@ -134,6 +138,7 @@ describe V3::Auth::FederationController do
       context 'behind proxy' do
         before do
           Rails.configuration.keystorm['behind_proxy'] = true
+          stub_const('V3::Auth::FederationController::OIDC_FILTERS', ['HTTP_OIDC'])
         end
 
         it 'will fail' do
@@ -145,6 +150,7 @@ describe V3::Auth::FederationController do
       context 'not behind proxy' do
         before do
           Rails.configuration.keystorm['behind_proxy'] = false
+          stub_const('V3::Auth::FederationController::OIDC_FILTERS', ['OIDC'])
         end
 
         it 'will fail' do

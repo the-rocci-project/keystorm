@@ -9,8 +9,8 @@ module V3
 
       after_action :audit_unscoped_token
 
-      OIDC_FILTERS = %w[OIDC].freeze
-      VOMS_FILTERS = %w[SSL GRST].freeze
+      OIDC_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_OIDC].freeze : %w[OIDC].freeze
+      VOMS_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_SSL HTTP_GRST].freeze : %w[SSL GRST].freeze
 
       def oidc
         set_auth_headers(::Auth::Oidc, unify_headers(OIDC_FILTERS))
@@ -30,7 +30,6 @@ module V3
       end
 
       def unify_headers(filters)
-        filters = filters.map { |filter| 'HTTP_' + filter } if Rails.configuration.keystorm['behind_proxy']
         request.headers.env.each_with_object({}) do |(key, val), hash|
           hash[key.gsub(/^HTTP_/, '')] = val if key.start_with?(*filters)
         end
