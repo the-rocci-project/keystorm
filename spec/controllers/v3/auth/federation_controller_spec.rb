@@ -3,6 +3,48 @@ require 'rails_helper'
 describe V3::Auth::FederationController do
   it_behaves_like 'timestampable'
 
+  describe 'GET #voms', type: :request do
+    let(:headers) { JSON_HEADERS.merge(voms_env) }
+
+    context 'with normal headers' do
+      let(:voms_env) do
+        { 'GRST_CRED_0' => %(X509USER 1492646400 1526731200 1 /DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535),
+          'GRST_CRED_1' => %(GSIPROXY 1500381287 1500424487 1 /DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535/CN=99672074),
+          'GRST_CRED_2' => %(VOMS 1500381287 1500424487 0 /fedcloud.egi.eu/Role=NULL/Capability=NULL),
+          'GRST_VOMS_FQANS' => '/fedcloud.egi.eu/Role=actor/Capability=NULL' }
+      end
+
+      context 'behind proxy' do
+        before do
+          Rails.configuration.keystorm['behind_proxy'] = true
+          stub_const('Auth::Voms::HEADERS_FILTERS', %w[HTTP_SSL HTTP_GRST])
+        end
+
+        it 'fails' do
+          get voms_v3_auth_federation_index_path, headers: headers
+          expect(response).to have_http_status :unauthorized
+        end
+      end
+
+      context 'not behind proxy' do
+        before do
+          Rails.configuration.keystorm['behind_proxy'] = false
+          stub_const('Auth::Voms::HEADERS_FILTERS', %w[SSL GRST])
+        end
+
+        it 'will be successful' do
+          get voms_v3_auth_federation_index_path, headers: headers
+          expect(response).to have_http_status :success
+        end
+
+        it 'will have X-Subject-Token set' do
+          get voms_v3_auth_federation_index_path, headers: headers
+          expect(response.headers['X-Subject-Token']).not_to be_nil
+        end
+      end
+    end
+  end
+
   describe 'GET #oidc', type: :request do
     let(:credentials_hash) do
       {
