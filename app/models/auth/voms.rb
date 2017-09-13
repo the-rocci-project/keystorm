@@ -38,7 +38,7 @@ module Auth
       end
 
       def parse_hash_groups!(hash)
-        raise Error::AuthenticationError, 'voms group env variable is not set' unless hash.key?('GRST_VOMS_FQANS')
+        raise Errors::AuthenticationError, 'voms group env variable is not set' unless hash.key?('GRST_VOMS_FQANS')
         groups = Hash.new { |h, k| h[k] = [] }
         hash['GRST_VOMS_FQANS'].split(';').each do |line|
           matches = line.match(VOMS_GROUP_REGEXP)
