@@ -1,6 +1,6 @@
 module Auth
   class Oidc
-    HEADERS_FITLERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_OIDC].freeze : %w[OIDC].freeze
+    HEADERS_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_OIDC].freeze : %w[OIDC].freeze
 
     class << self
       ENV_NAMES = {
