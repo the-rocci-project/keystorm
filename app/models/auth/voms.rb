@@ -41,15 +41,16 @@ module Auth
         raise Errors::AuthenticationError, 'voms group env variable is not set' unless hash.key?('GRST_VOMS_FQANS')
         groups = Hash.new { |h, k| h[k] = [] }
         hash['GRST_VOMS_FQANS'].split(';').each do |line|
-          group = parse_group(line)
-          groups.merge!(group) { |_, oldval, newval| oldval + newval } if group
+          group = parse_group!(line)
+          groups.merge!(group) { |_, oldval, newval| (oldval + newval).uniq } if group
         end
         groups.map { |key, value| { id: key, roles: value } }
       end
 
-      def parse_group(line)
+      def parse_group!(line)
         matches = line.match(VOMS_GROUP_REGEXP)
         raise Errors::AuthenticationError, 'voms group env variable has invalid format' unless matches
+        return if matches[:group].include?('/')
         if matches[:role] == 'NULL'
           { matches[:group] => [] }
         else

@@ -29,6 +29,36 @@ describe Auth::Voms, type: :model do
   end
 
   describe '#parse_hash_groups!' do
+    context 'with group with subgroups' do
+      let(:env_hash) do
+        { 'GRST_VOMS_FQANS' => '/coolclub/Role=NULL/Capability=NULL;' \
+                               '/testers/oldpeople/Role=useless/Capability=NULL' }
+      end
+
+      let(:final_groups) do
+        [{ id: 'coolclub', roles: %w[] }]
+      end
+
+      it 'will drop out subgroups' do
+        expect(Auth::Voms.send(:parse_hash_groups!, env_hash)).to eq(final_groups)
+      end
+    end
+
+    context 'with multiple same groups with same roles' do
+      let(:env_hash) do
+        { 'GRST_VOMS_FQANS' => '/coolclub/Role=gamers/Capability=NULL;' \
+                               '/coolclub/Role=gamers/Capability=NULL' }
+      end
+
+      let(:final_groups) do
+        [{ id: 'coolclub', roles: %w[gamers] }]
+      end
+
+      it 'wont have duplicate roles' do
+        expect(Auth::Voms.send(:parse_hash_groups!, env_hash)).to eq(final_groups)
+      end
+    end
+
     context 'with invalid groups' do
       let(:env_hash) do
         { 'GRST_VOMS_FQANS' => '/coolclub/Role=NULL/Capability=NUL;' \
