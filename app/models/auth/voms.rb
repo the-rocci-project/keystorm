@@ -50,12 +50,11 @@ module Auth
       def parse_group!(line)
         matches = line.match(VOMS_GROUP_REGEXP)
         raise Errors::AuthenticationError, 'voms group env variable has invalid format' unless matches
-        return if matches[:group].include?('/')
-        if matches[:role] == 'NULL'
-          { matches[:group] => [] }
-        else
-          { matches[:group] => [matches[:role]] }
+        if matches[:group].include?('/')
+          Rails.logger.warn { "Ignoring matched VOMS subgroup: #{matches[:group]}" }
+          return
         end
+        matches[:role] == 'NULL' ? { matches[:group] => [] } : { matches[:group] => [matches[:role]] }
       end
     end
   end
