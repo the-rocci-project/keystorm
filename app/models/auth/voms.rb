@@ -42,9 +42,9 @@ module Auth
         groups = Hash.new { |h, k| h[k] = [] }
         hash['GRST_VOMS_FQANS'].split(';').each do |line|
           group = parse_group!(line)
-          groups.merge!(group) { |_, oldval, newval| (oldval + newval).uniq } if group
+          groups.merge!(group) { |_, oldval, newval| oldval + newval } if group
         end
-        groups.map { |key, value| { id: key, roles: value } }
+        groups.map { |key, value| { id: key, roles: value.uniq } }
       end
 
       def parse_group!(line)
