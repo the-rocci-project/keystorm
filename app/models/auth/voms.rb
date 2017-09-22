@@ -49,7 +49,7 @@ module Auth
 
       def parse_group(line)
         matches = line.match(VOMS_GROUP_REGEXP)
-        return unless matches
+        raise Errors::AuthenticationError, 'voms group env variable has invalid format' unless matches
         if matches[:role] == 'NULL'
           { matches[:group] => [] }
         else

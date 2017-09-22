@@ -29,6 +29,22 @@ describe Auth::Voms, type: :model do
   end
 
   describe '#parse_hash_groups!' do
+    context 'with invalid groups' do
+      let(:env_hash) do
+        { 'GRST_VOMS_FQANS' => '/coolclub/Role=NULL/Capability=NUL;' \
+                               '/nerds/Roe=LL/Capabili=NLL;' \
+                               '/coolclRole=boyz/Capability=NULL;' \
+                               '/programmers/Role=useless/Capability=NULL;' \
+                               '/programmers/Role=useful/Cability=NULL;' \
+                               '/testes/Role=useCapability=NLL' }
+      end
+
+      it 'will raise error' do
+        expect { Auth::Voms.send(:parse_hash_groups!, env_hash) }.to \
+          raise_error(Errors::AuthenticationError)
+      end
+    end
+
     context 'with all kinds of groups' do
       let(:env_hash) do
         { 'GRST_VOMS_FQANS' => '/coolclub/Role=NULL/Capability=NULL;' \
