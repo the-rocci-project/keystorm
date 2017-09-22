@@ -5,7 +5,7 @@ module Auth
     HEADERS_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_SSL HTTP_GRST].freeze : %w[SSL GRST].freeze
 
     class << self
-      VOMS_GROUP_REGEXP = %r{^\/(?<group>[^\s]+)\/Role=(?<role>[^\s]+)\/Capability=NULL$}
+      VOMS_GROUP_REGEXP = %r{^\/(?<group>[^\s]+)\/Role=(?<role>[^\s]+)\/Capability=(?<capability>[^\s]+)$}
 
       def unified_credentials(hash)
         Rails.logger.debug { "Building VOMS unified credentials from #{hash.inspect}" }
@@ -41,10 +41,20 @@ module Auth
         raise Errors::AuthenticationError, 'voms group env variable is not set' unless hash.key?('GRST_VOMS_FQANS')
         groups = Hash.new { |h, k| h[k] = [] }
         hash['GRST_VOMS_FQANS'].split(';').each do |line|
-          matches = line.match(VOMS_GROUP_REGEXP)
-          groups[matches[:group]] << matches[:role] if matches && matches[:role] != 'NULL'
+          group = parse_group!(line)
+          groups.merge!(group) { |_, oldval, newval| oldval + newval } if group
         end
-        groups.map { |key, value| { id: key, roles: value } }
+        groups.map { |key, value| { id: key, roles: value.uniq } }
+      end
+
+      def parse_group!(line)
+        matches = line.match(VOMS_GROUP_REGEXP)
+        raise Errors::AuthenticationError, 'voms group env variable has invalid format' unless matches
+        if matches[:group].include?('/')
+          Rails.logger.warn { "Ignoring matched VOMS subgroup: #{matches[:group]}" }
+          return
+        end
+        matches[:role] == 'NULL' ? { matches[:group] => [] } : { matches[:group] => [matches[:role]] }
       end
     end
   end
