@@ -28,6 +28,30 @@ describe Auth::Voms, type: :model do
     end
   end
 
+  describe '#parse_hash_groups!' do
+    context 'with all kinds of groups' do
+      let(:env_hash) do
+        { 'GRST_VOMS_FQANS' => '/coolclub/Role=NULL/Capability=NULL;' \
+                               '/nerds/Role=NULL/Capability=NULL;' \
+                               '/coolclub/Role=boyz/Capability=NULL;' \
+                               '/programmers/Role=useless/Capability=NULL;' \
+                               '/programmers/Role=useful/Capability=NULL;' \
+                               '/testers/Role=useless/Capability=NULL' }
+      end
+
+      let(:final_groups) do
+        [{ id: 'coolclub', roles: %w[boyz] },
+         { id: 'nerds', roles: %w[] },
+         { id: 'programmers', roles: %w[useless useful] },
+         { id: 'testers', roles: %w[useless] }]
+      end
+
+      it 'will parse groups correctly' do
+        expect(Auth::Voms.send(:parse_hash_groups!, env_hash)).to eq(final_groups)
+      end
+    end
+  end
+
   describe '#parse_hash_exp!' do
     context 'with correct hash' do
       let(:exp_hash) do
@@ -66,7 +90,7 @@ describe Auth::Voms, type: :model do
       let(:correct_hash) do
         { id: '6694ddfebb77800c4d0aa0c6e3a7eb35bf7b3df83c312c23b8ca470930c4317b',
           email: 'root@localhost',
-          groups: [],
+          groups: [{ id: 'fedcloud.egi.eu', roles: [] }],
           authentication: { type: 'federation', method: 'voms' },
           name: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
           identity: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
