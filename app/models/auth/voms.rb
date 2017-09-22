@@ -5,7 +5,7 @@ module Auth
     HEADERS_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_SSL HTTP_GRST].freeze : %w[SSL GRST].freeze
 
     class << self
-      VOMS_GROUP_REGEXP = %r{^\/(?<group>[^\s]+)\/Role=(?<role>[^\s]+)\/Capability=NULL$}
+      VOMS_GROUP_REGEXP = %r{^\/(?<group>[^\s]+)\/Role=(?<role>[^\s]+)\/Capability=(?<capability>[^\s]+)$}
 
       def unified_credentials(hash)
         Rails.logger.debug { "Building VOMS unified credentials from #{hash.inspect}" }

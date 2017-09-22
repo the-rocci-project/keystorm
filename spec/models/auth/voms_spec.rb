@@ -29,6 +29,24 @@ describe Auth::Voms, type: :model do
   end
 
   describe '#parse_hash_groups!' do
+    context 'with valid groups with different capabilities' do
+      let(:env_hash) do
+        { 'GRST_VOMS_FQANS' => '/coolclub/Role=NULL/Capability=NULL;' \
+                               '/nicepeople/Role=model/Capability=full;' \
+                               '/others/Role=outofideas/Capability=none' }
+      end
+
+      let(:final_groups) do
+        [{ id: 'coolclub', roles: %w[] },
+         { id: 'nicepeople', roles: %w[model] },
+         { id: 'others', roles: %w[outofideas] }]
+      end
+
+      it 'will drop out subgroups' do
+        expect(Auth::Voms.send(:parse_hash_groups!, env_hash)).to eq(final_groups)
+      end
+    end
+
     context 'with group with subgroups' do
       let(:env_hash) do
         { 'GRST_VOMS_FQANS' => '/coolclub/Role=NULL/Capability=NULL;' \
