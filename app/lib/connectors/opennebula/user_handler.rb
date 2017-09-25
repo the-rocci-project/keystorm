@@ -17,11 +17,8 @@ module Connectors
       def create(username, password, auth, group)
         user = OpenNebula::User.new(OpenNebula::User.build_xml, client)
 
-        handle_opennebula_error do
-          user.allocate(username, password, auth)
-          user.chgrp group.id
-          user.info
-        end
+        handle_opennebula_error { user.allocate(username, password, auth, [group.id]) }
+        handle_opennebula_error { user.info }
 
         user
       end

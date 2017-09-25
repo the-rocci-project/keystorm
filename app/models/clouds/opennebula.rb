@@ -1,3 +1,5 @@
+require 'digest'
+
 module Clouds
   class Opennebula
     attr_reader :group_handler, :user_handler
@@ -42,7 +44,7 @@ module Clouds
 
     def register_user(credentials, group)
       Rails.logger.debug { "Registering user #{credentials.id.inspect} in  OpenNebula" }
-      user = user_handler.create(credentials.id, credentials.identity, 'remote', group)
+      user = user_handler.create(credentials.id, Digest::SHA256.hexdigest(credentials.identity), 'remote', group)
       user_handler.update(user, user_template(credentials))
 
       user
