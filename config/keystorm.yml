@@ -2,13 +2,13 @@ defaults: &defaults
   cloud: <%= ENV['KEYSTORM_CLOUD'] || 'opennebula' %>
   opennebula:
     endpoint: <%= ENV['KEYSTORM_OPENNEBULA_ENDPOINT'] || 'http://localhost:2633/RPC2' %>
-    secret: <%= ENV['KEYSTORM_OPENNEBULA_SECRET'] || 'oneadmin:opennebula' %>
+    secret: <%= ENV['KEYSTORM_OPENNEBULA_SECRET'] %>
   log_level: <%= ENV['KEYSTORM_LOG_LEVEL'] || 'info' %>
-  audit_file: <%= ENV['KEYSTORM_AUDIT_FILE'] || Rails.root.join('log', 'audit.log') %> 
+  audit_file: <%= ENV['KEYSTORM_AUDIT_FILE'] || Rails.root.join('log', 'audit.log') %>
   behind_proxy: <%= ENV['KEYSTORM_BEHIND_PROXY'] || true %>
   token_cipher: <%= ENV['KEYSTORM_TOKEN_CIPHER'] || 'AES-128-CBC' %>
-  token_key: <%= ENV['KEYSTORM_TOKEN_KEY'] || 'abcdefghijklmnop' %>
-  token_iv: <%= ENV['KEYSTORM_TOKEN_IV'] || 'zyxwvutsrqponmlk' %>
+  token_key: <%= ENV['KEYSTORM_TOKEN_KEY'] %>
+  token_iv: <%= ENV['KEYSTORM_TOKEN_IV'] %>
   memcache: <%= ENV['KEYSTORM_MEMCACHE'] || 'localhost:11211' %>
   oidc:
     matcher: <%= ENV['KEYSTORM_OIDC_MATCHER'] || 'urn:mace:egi.eu:aai.egi.eu:{role}@{group}' %>
@@ -33,3 +33,7 @@ development:
 
 test:
   <<: *defaults
+  token_key: abcdefghijklmnop
+  token_iv: zyxwvutsrqponmlk
+  opennebula:
+    secret: oneadmin:opennebula
