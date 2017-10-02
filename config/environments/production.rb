@@ -77,7 +77,7 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
   config.x.audit = ActiveSupport::Logger.new(config.keystorm['audit_file'])
-  config.x.audit.level = :info
+  config.x.audit.level = ActiveSupport::Logger::INFO
 
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)

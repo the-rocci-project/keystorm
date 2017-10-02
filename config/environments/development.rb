@@ -35,7 +35,10 @@ Rails.application.configure do
   # config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
-  config.x.audit = config.logger
+
+  config.x.audit = ActiveSupport::Logger.new(STDOUT)
+  config.x.audit.level = ActiveSupport::Logger::INFO
+
   config.log_level = config.keystorm['log_level'].to_sym
 
   config.logstasher.enabled = true
