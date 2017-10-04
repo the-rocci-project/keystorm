@@ -102,11 +102,7 @@ describe V3::Auth::FederationController do
                 roles: ['member']
               }
             ],
-          identity: '1',
-          name: nil,
-          email: nil,
-          issuer: nil,
-          acr: nil
+          identity: '1'
         }
       end
 

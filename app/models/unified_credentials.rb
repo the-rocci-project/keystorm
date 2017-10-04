@@ -25,7 +25,7 @@ class UnifiedCredentials
       identity: @identity,
       expiration: @expiration,
       issuer: @issuer,
-      acr: @acr }
+      acr: @acr }.compact
   end
 
   delegate :to_s, to: :to_hash
