@@ -136,7 +136,7 @@ describe Auth::Voms, type: :model do
           authentication: { type: 'federation', method: 'voms' },
           name: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
           identity: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
-          expiration: '1000028800',
+          expiration: 1_000_028_800,
           acr: nil,
           issuer: nil }
       end
@@ -166,7 +166,7 @@ describe Auth::Voms, type: :model do
           authentication: { type: 'federation', method: 'voms' },
           name: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
           identity: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
-          expiration: '1000028800',
+          expiration: 1_000_028_800,
           acr: nil,
           issuer: nil }
       end
