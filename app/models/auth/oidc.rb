@@ -5,37 +5,37 @@ module Auth
     HEADERS_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_OIDC].freeze : %w[OIDC].freeze
 
     class << self
-      ENV_NAMES = {
-        id: 'OIDC_sub',
-        email: 'OIDC_email',
-        groups: 'OIDC_edu_person_entitlements',
-        name: 'OIDC_name',
-        identity: 'OIDC_sub',
-        issuer: 'OIDC_iss',
-        acr: 'OIDC_acr'
-      }.freeze
+      REQUIRED_VARIABLES = %w[OIDC_sub OIDC_edu_person_entitlements].freeze
 
       def unified_credentials(hash)
         Rails.logger.debug { "Building OIDC unified credentials from #{hash.inspect}" }
         check_hash!(hash)
-        uc_hash = ENV_NAMES.map { |key, value| [key, hash[value]] }.to_h
-        uc_hash[:authentication] = { type: 'federation', method: 'oidc' }
-        uc_hash[:groups] = parse_hash_groups(hash)
-        uc_hash[:expiration] = expiration
-        UnifiedCredentials.new(uc_hash)
+        UnifiedCredentials.new(credential_args(hash))
       end
 
       private
 
+      def credential_args(hash)
+        { id: hash['OIDC_sub'],
+          email: hash['OIDC_email'],
+          groups: parse_hash_groups(hash),
+          authentication: { type: 'federation', method: 'oidc' },
+          name: hash['OIDC_name'],
+          identity: hash['OIDC_sub'],
+          expiration: expiration,
+          issuer: hash['OIDC_iss'],
+          acr: hash['OIDC_acr'] }
+      end
+
       def check_hash!(hash)
-        raise Errors::AuthenticationError, 'invalid oidc credential hash' \
-          unless ENV_NAMES.values.all? { |key| hash.key?(key) }
+        raise Errors::AuthenticationError, "env variables does not contain #{REQUIRED_VARIABLES.reject { |var| hash.key?(var) }}" \
+          unless REQUIRED_VARIABLES.all? { |key| hash.key?(key) }
       end
 
       def parse_hash_groups(hash)
         groups = Hash.new { |h, k| h[k] = [] }
         regexp = group_regexp
-        hash[ENV_NAMES[:groups]].split(';').each do |line|
+        hash['OIDC_edu_person_entitlements'].split(';').each do |line|
           matches = line.match(regexp)
           groups[matches[:group]] << matches[:role] if matches
         end
