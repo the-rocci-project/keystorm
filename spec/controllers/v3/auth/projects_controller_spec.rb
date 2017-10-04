@@ -9,7 +9,7 @@ describe V3::Auth::ProjectsController, :vcr, type: :controller do
     let(:request_path) { v3_auth_projects_path }
   end
 
-  it_behaves_like 'acceptable' do
+  it_behaves_like 'respondable' do
     let(:request_path) { v3_auth_projects_path }
     let(:method) { :get }
   end

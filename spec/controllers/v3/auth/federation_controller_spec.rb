@@ -3,6 +3,16 @@ require 'rails_helper'
 describe V3::Auth::FederationController do
   it_behaves_like 'timestampable'
 
+  it_behaves_like 'respondable' do
+    let(:request_path) { oidc_v3_auth_federation_index_path }
+    let(:method) { :get }
+  end
+
+  it_behaves_like 'respondable' do
+    let(:request_path) { voms_v3_auth_federation_index_path }
+    let(:method) { :get }
+  end
+
   describe 'GET #voms', type: :request do
     let(:headers) { JSON_HEADERS.merge(voms_env) }
 
