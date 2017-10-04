@@ -28,7 +28,7 @@ module Auth
       end
 
       def check_hash!(hash)
-        raise Errors::AuthenticationError, 'invalid oidc credential hash' \
+        raise Errors::AuthenticationError, "env variables does not contain #{REQUIRED_VARIABLES.reject { |var| hash.key?(var) }}" \
           unless REQUIRED_VARIABLES.all? { |key| hash.key?(key) }
       end
 
