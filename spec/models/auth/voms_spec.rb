@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe Auth::Voms, type: :model do
+  before do
+    allow(Time).to receive(:now).and_return(Time.zone.at(1_000_000_000))
+  end
+
   describe '#parse_hash_dn!' do
     context 'with correct hash' do
       let(:dn_hash) do
@@ -116,32 +120,6 @@ describe Auth::Voms, type: :model do
     end
   end
 
-  describe '#parse_hash_exp!' do
-    context 'with correct hash' do
-      let(:exp_hash) do
-        { 'GRST_CRED_0' => %(X509USER 1492646400 1526731200 1 /DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535),
-          'GRST_CRED_1' => %(GSIPROXY 1500381287 1500424487 1 /DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535/CN=99672074),
-          'GRST_CRED_2' => %(VOMS 1500381287 1500424487 0 /fedcloud.egi.eu/Role=NULL/Capability=NULL) }
-      end
-
-      it 'will parse correct time' do
-        expect(Auth::Voms.send(:parse_hash_exp!, exp_hash)).to eq('1500424487')
-      end
-    end
-
-    context 'with incorrect hash with no VOMS variable' do
-      let(:exp_hash) do
-        { 'GRST_CRED_0' => %(X509USER 1492646400 1526731200 1 /DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535),
-          'GRST_CRED_1' => %(GSIPROXY 1500381287 1500424487 1 /DC=org/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535/CN=99672074) }
-      end
-
-      it 'will raise error' do
-        expect { Auth::Voms.send(:parse_hash_exp!, exp_hash) }.to \
-          raise_error(Errors::AuthenticationError)
-      end
-    end
-  end
-
   describe '#unified_credentials' do
     context 'with correct hash with NULL' do
       let(:env_hash) do
@@ -158,7 +136,7 @@ describe Auth::Voms, type: :model do
           authentication: { type: 'federation', method: 'voms' },
           name: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
           identity: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
-          expiration: '1500424487',
+          expiration: 1_000_028_800,
           acr: nil,
           issuer: nil }
       end
@@ -188,7 +166,7 @@ describe Auth::Voms, type: :model do
           authentication: { type: 'federation', method: 'voms' },
           name: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
           identity: '/DC=org/DC=terena/DC=tcs/C=CZ/O=CESNET/CN=Michal Kimle 1535',
-          expiration: '1500424487',
+          expiration: 1_000_028_800,
           acr: nil,
           issuer: nil }
       end

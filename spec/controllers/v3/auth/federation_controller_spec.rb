@@ -13,6 +13,10 @@ describe V3::Auth::FederationController do
     let(:method) { :get }
   end
 
+  before do
+    allow(Time).to receive(:now).and_return(Time.zone.at(1_000_000_000))
+  end
+
   describe 'GET #voms', type: :request do
     let(:headers) { JSON_HEADERS.merge(voms_env) }
 
@@ -70,7 +74,7 @@ describe V3::Auth::FederationController do
         authentication:  { type: 'federation', method: 'oidc' },
         name:            'Ben Dover',
         identity:        '1',
-        expiration:      '123456789',
+        expiration:      1_000_028_800,
         issuer:          'gogol.com',
         acr:             'goglo.com'
       }
@@ -84,7 +88,6 @@ describe V3::Auth::FederationController do
           'OIDC_sub'                     => '1',
           'OIDC_email'                   => 'ben.dover@majl.ru',
           'OIDC_edu_person_entitlements' => 'urn:mace:egi.eu:aai.egi.eu:member@fedcloud.egi.eu',
-          'OIDC_access_token_expires'    => '123456789',
           'OIDC_name'                    => 'Ben Dover',
           'OIDC_iss'                     => 'gogol.com',
           'OIDC_acr'                     => 'goglo.com'
@@ -132,7 +135,6 @@ describe V3::Auth::FederationController do
           'HTTP_OIDC_sub'                     => '1',
           'HTTP_OIDC_email'                   => 'ben.dover@majl.ru',
           'HTTP_OIDC_edu_person_entitlements' => 'urn:mace:egi.eu:aai.egi.eu:member@fedcloud.egi.eu',
-          'HTTP_OIDC_access_token_expires'    => '123456789',
           'HTTP_OIDC_name'                    => 'Ben Dover',
           'HTTP_OIDC_iss'                     => 'gogol.com',
           'HTTP_OIDC_acr'                     => 'goglo.com'
