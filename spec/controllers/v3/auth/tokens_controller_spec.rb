@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe V3::Auth::TokensController, :vcr, type: :controller do
+  it_behaves_like 'respondable' do
+    let(:request_path) { v3_auth_tokens_path }
+    let(:method) { :post }
+  end
+
   it_behaves_like 'acceptable' do
     let(:request_path) { v3_auth_tokens_path }
     let(:method) { :post }

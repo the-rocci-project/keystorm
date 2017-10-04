@@ -1,4 +1,5 @@
 defaults: &defaults
+  endpoint: <%= ENV['KEYSTORM_ENDPOINT'] || 'https://localhost:3000/' %>
   cloud: <%= ENV['KEYSTORM_CLOUD'] || 'opennebula' %>
   opennebula:
     endpoint: <%= ENV['KEYSTORM_OPENNEBULA_ENDPOINT'] || 'http://localhost:2633/RPC2' %>

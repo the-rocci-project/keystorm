@@ -7,7 +7,7 @@ module Acceptable
   included do
     self.responder = ApplicationResponder
     respond_to(*ACCEPTABLE_FORMATS)
-    before_action :validate_requested_format!, :validate_provided_format!
+    before_action :validate_requested_format!
   end
 
   # Checks request format and defaults or returns HTTP[406].

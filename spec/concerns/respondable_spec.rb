@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-shared_examples_for 'acceptable', type: :request do
+shared_examples_for 'respondable', type: :request do
   let(:headers) { JSON_HEADERS }
 
-  context 'with missing provided format' do
-    let(:headers) { JSON_HEADERS.select { |key, _value| key == 'ACCEPT' } }
+  context 'with missing response format' do
+    let(:headers) { JSON_HEADERS.select { |key, _value| key == 'CONTENT_TYPE' } }
 
     it 'returns not acceptable status code' do
       send(method, request_path, headers: headers)
@@ -12,8 +12,8 @@ shared_examples_for 'acceptable', type: :request do
     end
   end
 
-  context 'with wrong provided format' do
-    let(:headers) { JSON_HEADERS.merge('CONTENT_TYPE' => 'text/plain') }
+  context 'with wrong response format' do
+    let(:headers) { JSON_HEADERS.merge('ACCEPT' => 'text/plain') }
 
     it 'returns not acceptable status code' do
       send(method, request_path, headers: headers)
