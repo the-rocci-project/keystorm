@@ -6,7 +6,7 @@ defaults: &defaults
     secret: <%= ENV['KEYSTORM_OPENNEBULA_SECRET'] %>
   log_level: <%= ENV['KEYSTORM_LOG_LEVEL'] || 'info' %>
   audit_file: <%= ENV['KEYSTORM_AUDIT_FILE'] || Rails.root.join('log', 'audit.log') %>
-  expiration_window: <%= ENV['KEYSTORM_EXPIRATION_WINDOW'] || 691_200 %>
+  expiration_window: <%= ENV['KEYSTORM_EXPIRATION_WINDOW'] || 28_800 %>
   behind_proxy: <%= ENV['KEYSTORM_BEHIND_PROXY'] || true %>
   token_cipher: <%= ENV['KEYSTORM_TOKEN_CIPHER'] || 'AES-128-CBC' %>
   token_key: <%= ENV['KEYSTORM_TOKEN_KEY'] %>
