@@ -1,0 +1,19 @@
+{
+  "version":{
+    "status":"stable",
+    "updated":"2017-10-10T00:00:00Z",
+    "media-types":[
+      {
+        "base":"application/json",
+        "type":"application/vnd.openstack.identity-v3+json"
+      }
+    ],
+    "id":"v3.0",
+    "links":[
+      {
+        "href":"https://over.the.rainbow:1234/v3",
+        "rel":"self"
+      }
+    ]
+  }
+}

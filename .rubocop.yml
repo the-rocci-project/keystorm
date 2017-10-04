@@ -39,3 +39,8 @@ Metrics/BlockLength:
 
 RSpec/NestedGroups:
   Enabled: false
+
+RSpec/LetBeforeExamples:
+  Exclude:
+    - 'spec/controllers/discovery_controller_spec.rb'
+    - 'spec/controllers/v3/info_controller_spec.rb'
