@@ -1,5 +1,7 @@
 module Auth
   class Oidc
+    extend Expirable
+
     HEADERS_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_OIDC].freeze : %w[OIDC].freeze
 
     class << self
@@ -9,7 +11,6 @@ module Auth
         groups: 'OIDC_edu_person_entitlements',
         name: 'OIDC_name',
         identity: 'OIDC_sub',
-        expiration: 'OIDC_access_token_expires',
         issuer: 'OIDC_iss',
         acr: 'OIDC_acr'
       }.freeze
@@ -20,6 +21,7 @@ module Auth
         uc_hash = ENV_NAMES.map { |key, value| [key, hash[value]] }.to_h
         uc_hash[:authentication] = { type: 'federation', method: 'oidc' }
         uc_hash[:groups] = parse_hash_groups(hash)
+        uc_hash[:expiration] = expiration
         UnifiedCredentials.new(uc_hash)
       end
 

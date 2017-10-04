@@ -2,6 +2,8 @@ require 'digest'
 
 module Auth
   class Voms
+    extend Expirable
+
     HEADERS_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_SSL HTTP_GRST].freeze : %w[SSL GRST].freeze
 
     class << self
@@ -16,7 +18,7 @@ module Auth
                                authentication: { type: 'federation', method: 'voms' },
                                name: dn,
                                identity: dn,
-                               expiration: parse_hash_exp!(hash))
+                               expiration: expiration)
       end
 
       private
@@ -27,14 +29,6 @@ module Auth
           return matches[:dn] if matches
         end
         raise Errors::AuthenticationError, 'failed to parse dn from env variables'
-      end
-
-      def parse_hash_exp!(hash)
-        hash.select { |key| /GRST_CRED_\d+/ =~ key }.each_value do |cred|
-          matches = cred.match(/^VOMS (\d+) (?<expiration>\d+) (\d+) (.+)$/)
-          return matches[:expiration] if matches
-        end
-        raise Errors::AuthenticationError, 'failed to parse expiration from env variables'
       end
 
       def parse_hash_groups!(hash)
