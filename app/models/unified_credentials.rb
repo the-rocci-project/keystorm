@@ -6,10 +6,10 @@ class UnifiedCredentials
   def initialize(args = {})
     Rails.logger.debug { "Initializing unified credentials: #{args.inspect}" }
     @id = args.fetch(:id)
-    @email = args.fetch(:email)
+    @email = args.fetch(:email, nil)
     @groups = args.fetch(:groups)
     @authentication = args.fetch(:authentication)
-    @name = args.fetch(:name)
+    @name = args.fetch(:name, nil)
     @identity = args.fetch(:identity)
     @expiration = args.fetch(:expiration)
     @issuer = args.fetch(:issuer, nil)
