@@ -85,6 +85,13 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  if ENV['RAILS_LOG_TO_SYSLOG'].present?
+    require 'syslog/logger'
+    config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new('keystorm'))
+    config.logger.level = ActiveSupport::Logger.const_get(config.keystorm['log_level'].upcase)
+    config.logger.warn 'Asking for STDOUT and SYSLOG -> using SYSLOG' if ENV['RAILS_LOG_TO_STDOUT'].present?
+  end
+
   # Do not dump schema after migrations.
   # config.active_record.dump_schema_after_migration = false
 end
