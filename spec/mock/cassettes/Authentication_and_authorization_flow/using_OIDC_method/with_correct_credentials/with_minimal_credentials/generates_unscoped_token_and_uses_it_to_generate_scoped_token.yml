@@ -1,0 +1,326 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:2633/RPC2
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" ?><methodCall><methodName>one.grouppool.info</methodName><params><param><value><string>oneadmin:opennebula</string></value></param></params></methodCall>
+    headers:
+      User-Agent:
+      - XMLRPC::Client (Ruby 2.2.7)
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '174'
+      Connection:
+      - close
+      Accept-Encoding:
+      - identity
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '2629'
+      Connection:
+      - close
+      Date:
+      - Fri, 06 Oct 2017 10:03:29 UTC
+      Server:
+      - Xmlrpc-c_Abyss/1.40.0
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><string>&lt;GROUP_POOL&gt;&lt;GROUP&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;NAME&gt;oneadmin&lt;/NAME&gt;&lt;TEMPLATE&gt;&lt;/TEMPLATE&gt;&lt;USERS&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;ID&gt;1&lt;/ID&gt;&lt;/USERS&gt;&lt;ADMINS&gt;&lt;/ADMINS&gt;&lt;/GROUP&gt;&lt;QUOTAS&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/QUOTAS&gt;&lt;GROUP&gt;&lt;ID&gt;1&lt;/ID&gt;&lt;NAME&gt;users&lt;/NAME&gt;&lt;TEMPLATE&gt;&lt;SUNSTONE&gt;&lt;DEFAULT_VIEW&gt;&lt;![CDATA[cloud]]&gt;&lt;/DEFAULT_VIEW&gt;&lt;GROUP_ADMIN_DEFAULT_VIEW&gt;&lt;![CDATA[groupadmin]]&gt;&lt;/GROUP_ADMIN_DEFAULT_VIEW&gt;&lt;GROUP_ADMIN_VIEWS&gt;&lt;![CDATA[groupadmin,cloud]]&gt;&lt;/GROUP_ADMIN_VIEWS&gt;&lt;VIEWS&gt;&lt;![CDATA[cloud]]&gt;&lt;/VIEWS&gt;&lt;/SUNSTONE&gt;&lt;/TEMPLATE&gt;&lt;USERS&gt;&lt;/USERS&gt;&lt;ADMINS&gt;&lt;/ADMINS&gt;&lt;/GROUP&gt;&lt;QUOTAS&gt;&lt;ID&gt;1&lt;/ID&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/QUOTAS&gt;&lt;GROUP&gt;&lt;ID&gt;101&lt;/ID&gt;&lt;NAME&gt;group01&lt;/NAME&gt;&lt;TEMPLATE&gt;&lt;KEYSTORM&gt;&lt;![CDATA[YES]]&gt;&lt;/KEYSTORM&gt;&lt;OPENNEBULA&gt;&lt;DEFAULT_IMAGE_PERSISTENT&gt;&lt;![CDATA[NO]]&gt;&lt;/DEFAULT_IMAGE_PERSISTENT&gt;&lt;DEFAULT_IMAGE_PERSISTENT_NEW&gt;&lt;![CDATA[NO]]&gt;&lt;/DEFAULT_IMAGE_PERSISTENT_NEW&gt;&lt;/OPENNEBULA&gt;&lt;SUNSTONE&gt;&lt;DEFAULT_VIEW&gt;&lt;![CDATA[cloud]]&gt;&lt;/DEFAULT_VIEW&gt;&lt;GROUP_ADMIN_DEFAULT_VIEW&gt;&lt;![CDATA[groupadmin]]&gt;&lt;/GROUP_ADMIN_DEFAULT_VIEW&gt;&lt;GROUP_ADMIN_VIEWS&gt;&lt;![CDATA[groupadmin,cloud]]&gt;&lt;/GROUP_ADMIN_VIEWS&gt;&lt;VIEWS&gt;&lt;![CDATA[cloud]]&gt;&lt;/VIEWS&gt;&lt;/SUNSTONE&gt;&lt;/TEMPLATE&gt;&lt;USERS&gt;&lt;/USERS&gt;&lt;ADMINS&gt;&lt;/ADMINS&gt;&lt;/GROUP&gt;&lt;QUOTAS&gt;&lt;ID&gt;101&lt;/ID&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/QUOTAS&gt;&lt;DEFAULT_GROUP_QUOTAS&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/DEFAULT_GROUP_QUOTAS&gt;&lt;/GROUP_POOL&gt;</string></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 09:09:27 GMT
+- request:
+    method: post
+    uri: http://localhost:2633/RPC2
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" ?><methodCall><methodName>one.grouppool.info</methodName><params><param><value><string>oneadmin:opennebula</string></value></param></params></methodCall>
+    headers:
+      User-Agent:
+      - XMLRPC::Client (Ruby 2.2.7)
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '174'
+      Connection:
+      - close
+      Accept-Encoding:
+      - identity
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '2629'
+      Connection:
+      - close
+      Date:
+      - Fri, 06 Oct 2017 10:03:29 UTC
+      Server:
+      - Xmlrpc-c_Abyss/1.40.0
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><string>&lt;GROUP_POOL&gt;&lt;GROUP&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;NAME&gt;oneadmin&lt;/NAME&gt;&lt;TEMPLATE&gt;&lt;/TEMPLATE&gt;&lt;USERS&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;ID&gt;1&lt;/ID&gt;&lt;/USERS&gt;&lt;ADMINS&gt;&lt;/ADMINS&gt;&lt;/GROUP&gt;&lt;QUOTAS&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/QUOTAS&gt;&lt;GROUP&gt;&lt;ID&gt;1&lt;/ID&gt;&lt;NAME&gt;users&lt;/NAME&gt;&lt;TEMPLATE&gt;&lt;SUNSTONE&gt;&lt;DEFAULT_VIEW&gt;&lt;![CDATA[cloud]]&gt;&lt;/DEFAULT_VIEW&gt;&lt;GROUP_ADMIN_DEFAULT_VIEW&gt;&lt;![CDATA[groupadmin]]&gt;&lt;/GROUP_ADMIN_DEFAULT_VIEW&gt;&lt;GROUP_ADMIN_VIEWS&gt;&lt;![CDATA[groupadmin,cloud]]&gt;&lt;/GROUP_ADMIN_VIEWS&gt;&lt;VIEWS&gt;&lt;![CDATA[cloud]]&gt;&lt;/VIEWS&gt;&lt;/SUNSTONE&gt;&lt;/TEMPLATE&gt;&lt;USERS&gt;&lt;/USERS&gt;&lt;ADMINS&gt;&lt;/ADMINS&gt;&lt;/GROUP&gt;&lt;QUOTAS&gt;&lt;ID&gt;1&lt;/ID&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/QUOTAS&gt;&lt;GROUP&gt;&lt;ID&gt;101&lt;/ID&gt;&lt;NAME&gt;group01&lt;/NAME&gt;&lt;TEMPLATE&gt;&lt;KEYSTORM&gt;&lt;![CDATA[YES]]&gt;&lt;/KEYSTORM&gt;&lt;OPENNEBULA&gt;&lt;DEFAULT_IMAGE_PERSISTENT&gt;&lt;![CDATA[NO]]&gt;&lt;/DEFAULT_IMAGE_PERSISTENT&gt;&lt;DEFAULT_IMAGE_PERSISTENT_NEW&gt;&lt;![CDATA[NO]]&gt;&lt;/DEFAULT_IMAGE_PERSISTENT_NEW&gt;&lt;/OPENNEBULA&gt;&lt;SUNSTONE&gt;&lt;DEFAULT_VIEW&gt;&lt;![CDATA[cloud]]&gt;&lt;/DEFAULT_VIEW&gt;&lt;GROUP_ADMIN_DEFAULT_VIEW&gt;&lt;![CDATA[groupadmin]]&gt;&lt;/GROUP_ADMIN_DEFAULT_VIEW&gt;&lt;GROUP_ADMIN_VIEWS&gt;&lt;![CDATA[groupadmin,cloud]]&gt;&lt;/GROUP_ADMIN_VIEWS&gt;&lt;VIEWS&gt;&lt;![CDATA[cloud]]&gt;&lt;/VIEWS&gt;&lt;/SUNSTONE&gt;&lt;/TEMPLATE&gt;&lt;USERS&gt;&lt;/USERS&gt;&lt;ADMINS&gt;&lt;/ADMINS&gt;&lt;/GROUP&gt;&lt;QUOTAS&gt;&lt;ID&gt;101&lt;/ID&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/QUOTAS&gt;&lt;DEFAULT_GROUP_QUOTAS&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/DEFAULT_GROUP_QUOTAS&gt;&lt;/GROUP_POOL&gt;</string></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 09:09:27 GMT
+- request:
+    method: post
+    uri: http://localhost:2633/RPC2
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" ?><methodCall><methodName>one.userpool.info</methodName><params><param><value><string>oneadmin:opennebula</string></value></param></params></methodCall>
+    headers:
+      User-Agent:
+      - XMLRPC::Client (Ruby 2.2.7)
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '173'
+      Connection:
+      - close
+      Accept-Encoding:
+      - identity
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '1968'
+      Connection:
+      - close
+      Date:
+      - Fri, 06 Oct 2017 10:03:29 UTC
+      Server:
+      - Xmlrpc-c_Abyss/1.40.0
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><string>&lt;USER_POOL&gt;&lt;USER&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;GID&gt;0&lt;/GID&gt;&lt;GROUPS&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;/GROUPS&gt;&lt;GNAME&gt;oneadmin&lt;/GNAME&gt;&lt;NAME&gt;oneadmin&lt;/NAME&gt;&lt;PASSWORD&gt;&lt;![CDATA[4478db59d30855454ece114e8ccfa5563d21c9bd]]&gt;&lt;/PASSWORD&gt;&lt;AUTH_DRIVER&gt;&lt;![CDATA[core]]&gt;&lt;/AUTH_DRIVER&gt;&lt;ENABLED&gt;1&lt;/ENABLED&gt;&lt;TEMPLATE&gt;&lt;TOKEN_PASSWORD&gt;&lt;![CDATA[fe8c6045754c4a441ca4bd71a3de3d66e7fcd401]]&gt;&lt;/TOKEN_PASSWORD&gt;&lt;/TEMPLATE&gt;&lt;/USER&gt;&lt;QUOTAS&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/QUOTAS&gt;&lt;USER&gt;&lt;ID&gt;1&lt;/ID&gt;&lt;GID&gt;0&lt;/GID&gt;&lt;GROUPS&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;/GROUPS&gt;&lt;GNAME&gt;oneadmin&lt;/GNAME&gt;&lt;NAME&gt;serveradmin&lt;/NAME&gt;&lt;PASSWORD&gt;&lt;![CDATA[9159e008a44183e19d75af12984cb51908d4cc7d]]&gt;&lt;/PASSWORD&gt;&lt;AUTH_DRIVER&gt;&lt;![CDATA[server_cipher]]&gt;&lt;/AUTH_DRIVER&gt;&lt;ENABLED&gt;1&lt;/ENABLED&gt;&lt;TEMPLATE&gt;&lt;TOKEN_PASSWORD&gt;&lt;![CDATA[4d98d635c74634b81a28cb2e636102190d3fd480]]&gt;&lt;/TOKEN_PASSWORD&gt;&lt;/TEMPLATE&gt;&lt;/USER&gt;&lt;QUOTAS&gt;&lt;ID&gt;1&lt;/ID&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/QUOTAS&gt;&lt;DEFAULT_USER_QUOTAS&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/DEFAULT_USER_QUOTAS&gt;&lt;/USER_POOL&gt;</string></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 09:09:27 GMT
+- request:
+    method: post
+    uri: http://localhost:2633/RPC2
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" ?><methodCall><methodName>one.user.allocate</methodName><params><param><value><string>oneadmin:opennebula</string></value></param><param><value><string>1</string></value></param><param><value><string>6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b</string></value></param><param><value><string>remote</string></value></param><param><value><array><data><value><i4>101</i4></value></data></array></value></param></params></methodCall>
+    headers:
+      User-Agent:
+      - XMLRPC::Client (Ruby 2.2.7)
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '470'
+      Connection:
+      - close
+      Accept-Encoding:
+      - identity
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '251'
+      Connection:
+      - close
+      Date:
+      - Fri, 06 Oct 2017 10:03:29 UTC
+      Server:
+      - Xmlrpc-c_Abyss/1.40.0
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><i4>2</i4></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 09:09:27 GMT
+- request:
+    method: post
+    uri: http://localhost:2633/RPC2
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" ?><methodCall><methodName>one.user.info</methodName><params><param><value><string>oneadmin:opennebula</string></value></param><param><value><i4>2</i4></value></param></params></methodCall>
+    headers:
+      User-Agent:
+      - XMLRPC::Client (Ruby 2.2.7)
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '209'
+      Connection:
+      - close
+      Accept-Encoding:
+      - identity
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '1169'
+      Connection:
+      - close
+      Date:
+      - Fri, 06 Oct 2017 10:03:29 UTC
+      Server:
+      - Xmlrpc-c_Abyss/1.40.0
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><string>&lt;USER&gt;&lt;ID&gt;2&lt;/ID&gt;&lt;GID&gt;101&lt;/GID&gt;&lt;GROUPS&gt;&lt;ID&gt;101&lt;/ID&gt;&lt;/GROUPS&gt;&lt;GNAME&gt;group01&lt;/GNAME&gt;&lt;NAME&gt;1&lt;/NAME&gt;&lt;PASSWORD&gt;&lt;![CDATA[6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b]]&gt;&lt;/PASSWORD&gt;&lt;AUTH_DRIVER&gt;&lt;![CDATA[remote]]&gt;&lt;/AUTH_DRIVER&gt;&lt;ENABLED&gt;1&lt;/ENABLED&gt;&lt;TEMPLATE&gt;&lt;TOKEN_PASSWORD&gt;&lt;![CDATA[237fff500eeac92f63cd5d1b4ba53873e3b8a3cb]]&gt;&lt;/TOKEN_PASSWORD&gt;&lt;/TEMPLATE&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;DEFAULT_USER_QUOTAS&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/DEFAULT_USER_QUOTAS&gt;&lt;/USER&gt;</string></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 09:09:27 GMT
+- request:
+    method: post
+    uri: http://localhost:2633/RPC2
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" ?><methodCall><methodName>one.user.update</methodName><params><param><value><string>oneadmin:opennebula</string></value></param><param><value><i4>2</i4></value></param><param><value><string>"ID" = "1"
+        "AUTHENTICATION" = "oidc"
+        "IDENTITY" = "1"
+        "EXPIRATION" = "1507309767"</string></value></param><param><value><i4>1</i4></value></param></params></methodCall>
+    headers:
+      User-Agent:
+      - XMLRPC::Client (Ruby 2.2.7)
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '379'
+      Connection:
+      - close
+      Accept-Encoding:
+      - identity
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '251'
+      Connection:
+      - close
+      Date:
+      - Fri, 06 Oct 2017 10:03:29 UTC
+      Server:
+      - Xmlrpc-c_Abyss/1.40.0
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><i4>2</i4></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 09:09:27 GMT
+- request:
+    method: post
+    uri: http://localhost:2633/RPC2
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" ?><methodCall><methodName>one.grouppool.info</methodName><params><param><value><string>oneadmin:opennebula</string></value></param></params></methodCall>
+    headers:
+      User-Agent:
+      - XMLRPC::Client (Ruby 2.2.7)
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '174'
+      Connection:
+      - close
+      Accept-Encoding:
+      - identity
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '2651'
+      Connection:
+      - close
+      Date:
+      - Fri, 06 Oct 2017 10:03:29 UTC
+      Server:
+      - Xmlrpc-c_Abyss/1.40.0
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><string>&lt;GROUP_POOL&gt;&lt;GROUP&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;NAME&gt;oneadmin&lt;/NAME&gt;&lt;TEMPLATE&gt;&lt;/TEMPLATE&gt;&lt;USERS&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;ID&gt;1&lt;/ID&gt;&lt;/USERS&gt;&lt;ADMINS&gt;&lt;/ADMINS&gt;&lt;/GROUP&gt;&lt;QUOTAS&gt;&lt;ID&gt;0&lt;/ID&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/QUOTAS&gt;&lt;GROUP&gt;&lt;ID&gt;1&lt;/ID&gt;&lt;NAME&gt;users&lt;/NAME&gt;&lt;TEMPLATE&gt;&lt;SUNSTONE&gt;&lt;DEFAULT_VIEW&gt;&lt;![CDATA[cloud]]&gt;&lt;/DEFAULT_VIEW&gt;&lt;GROUP_ADMIN_DEFAULT_VIEW&gt;&lt;![CDATA[groupadmin]]&gt;&lt;/GROUP_ADMIN_DEFAULT_VIEW&gt;&lt;GROUP_ADMIN_VIEWS&gt;&lt;![CDATA[groupadmin,cloud]]&gt;&lt;/GROUP_ADMIN_VIEWS&gt;&lt;VIEWS&gt;&lt;![CDATA[cloud]]&gt;&lt;/VIEWS&gt;&lt;/SUNSTONE&gt;&lt;/TEMPLATE&gt;&lt;USERS&gt;&lt;/USERS&gt;&lt;ADMINS&gt;&lt;/ADMINS&gt;&lt;/GROUP&gt;&lt;QUOTAS&gt;&lt;ID&gt;1&lt;/ID&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/QUOTAS&gt;&lt;GROUP&gt;&lt;ID&gt;101&lt;/ID&gt;&lt;NAME&gt;group01&lt;/NAME&gt;&lt;TEMPLATE&gt;&lt;KEYSTORM&gt;&lt;![CDATA[YES]]&gt;&lt;/KEYSTORM&gt;&lt;OPENNEBULA&gt;&lt;DEFAULT_IMAGE_PERSISTENT&gt;&lt;![CDATA[NO]]&gt;&lt;/DEFAULT_IMAGE_PERSISTENT&gt;&lt;DEFAULT_IMAGE_PERSISTENT_NEW&gt;&lt;![CDATA[NO]]&gt;&lt;/DEFAULT_IMAGE_PERSISTENT_NEW&gt;&lt;/OPENNEBULA&gt;&lt;SUNSTONE&gt;&lt;DEFAULT_VIEW&gt;&lt;![CDATA[cloud]]&gt;&lt;/DEFAULT_VIEW&gt;&lt;GROUP_ADMIN_DEFAULT_VIEW&gt;&lt;![CDATA[groupadmin]]&gt;&lt;/GROUP_ADMIN_DEFAULT_VIEW&gt;&lt;GROUP_ADMIN_VIEWS&gt;&lt;![CDATA[groupadmin,cloud]]&gt;&lt;/GROUP_ADMIN_VIEWS&gt;&lt;VIEWS&gt;&lt;![CDATA[cloud]]&gt;&lt;/VIEWS&gt;&lt;/SUNSTONE&gt;&lt;/TEMPLATE&gt;&lt;USERS&gt;&lt;ID&gt;2&lt;/ID&gt;&lt;/USERS&gt;&lt;ADMINS&gt;&lt;/ADMINS&gt;&lt;/GROUP&gt;&lt;QUOTAS&gt;&lt;ID&gt;101&lt;/ID&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/QUOTAS&gt;&lt;DEFAULT_GROUP_QUOTAS&gt;&lt;DATASTORE_QUOTA&gt;&lt;/DATASTORE_QUOTA&gt;&lt;NETWORK_QUOTA&gt;&lt;/NETWORK_QUOTA&gt;&lt;VM_QUOTA&gt;&lt;/VM_QUOTA&gt;&lt;IMAGE_QUOTA&gt;&lt;/IMAGE_QUOTA&gt;&lt;/DEFAULT_GROUP_QUOTAS&gt;&lt;/GROUP_POOL&gt;</string></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 09:09:27 GMT
+- request:
+    method: post
+    uri: http://localhost:2633/RPC2
+    body:
+      encoding: UTF-8
+      string: |
+        <?xml version="1.0" ?><methodCall><methodName>one.user.login</methodName><params><param><value><string>oneadmin:opennebula</string></value></param><param><value><string>1</string></value></param><param><value><string></string></value></param><param><value><i4>28800</i4></value></param><param><value><i4>101</i4></value></param></params></methodCall>
+    headers:
+      User-Agent:
+      - XMLRPC::Client (Ruby 2.2.7)
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '351'
+      Connection:
+      - close
+      Accept-Encoding:
+      - identity
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - text/xml; charset=utf-8
+      Content-Length:
+      - '298'
+      Connection:
+      - close
+      Date:
+      - Fri, 06 Oct 2017 10:03:29 UTC
+      Server:
+      - Xmlrpc-c_Abyss/1.40.0
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<methodResponse>\r\n<params>\r\n<param><value><array><data>\r\n<value><boolean>1</boolean></value>\r\n<value><string>322be97e8dd8fe548ee38c0183096331eb7c9e15</string></value>\r\n<value><i4>0</i4></value>\r\n</data></array></value></param>\r\n</params>\r\n</methodResponse>\r\n"
+    http_version: 
+  recorded_at: Fri, 06 Oct 2017 09:09:27 GMT
+recorded_with: VCR 3.0.3

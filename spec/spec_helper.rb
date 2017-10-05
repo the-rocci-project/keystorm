@@ -30,8 +30,16 @@ def load_response(filename, hash: false)
   response
 end
 
-def load_request(filename)
-  File.read(File.join(MOCK_DIR, 'requests', filename))
+def load_request(filename, hash: false)
+  request = File.read(File.join(MOCK_DIR, 'requests', filename))
+  request = JSON.parse(request).deep_symbolize_keys if hash
+
+  request
+end
+
+def load_envs(filename)
+  env_vars = File.read(File.join(MOCK_DIR, 'auth_envs', filename))
+  JSON.parse(env_vars).deep_symbolize_keys
 end
 
 WebMock.disable_net_connect!(allow_localhost: true)
