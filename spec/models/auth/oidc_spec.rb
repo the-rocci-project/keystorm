@@ -4,7 +4,7 @@ describe Auth::Oidc, type: :model do
   describe '#parse_hash_groups' do
     context 'with correct groups' do
       let(:env_hash) do
-        { 'OIDC_edu_person_entitlements' \
+        { 'OIDC_EDU_PERSON_ENTITLEMENTS' \
            => File.read(File.join(MOCK_DIR, 'groups')) }
       end
 
@@ -21,7 +21,7 @@ describe Auth::Oidc, type: :model do
 
     context 'with incorrect groups' do
       let(:env_hash) do
-        { 'OIDC_edu_person_entitlements' \
+        { 'OIDC_EDU_PERSON_ENTITLEMENTS' \
           => File.read(File.join(MOCK_DIR, 'wrong_groups')) }
       end
 

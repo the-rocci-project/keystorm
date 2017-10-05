@@ -28,7 +28,7 @@ module V3
 
       def unify_headers(filters)
         request.headers.env.each_with_object({}) do |(key, val), hash|
-          hash[key.gsub(/^HTTP_/, '')] = val if key.start_with?(*filters)
+          hash[key.gsub(/^HTTP_/, '').upcase] = val if key.start_with?(*filters)
         end
       end
     end
