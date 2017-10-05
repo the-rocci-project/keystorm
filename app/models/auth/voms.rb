@@ -13,7 +13,6 @@ module Auth
         Rails.logger.debug { "Building VOMS unified credentials from #{hash.inspect}" }
         dn = parse_hash_dn!(hash)
         UnifiedCredentials.new(id: Digest::SHA256.hexdigest(dn),
-                               email: Rails.configuration.keystorm['voms']['default_email'],
                                groups: parse_hash_groups!(hash),
                                authentication: { type: 'federation', method: 'voms' },
                                name: dn,

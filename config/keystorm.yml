@@ -14,8 +14,6 @@ defaults: &defaults
   memcache: <%= ENV['KEYSTORM_MEMCACHE'] || 'localhost:11211' %>
   oidc:
     matcher: <%= ENV['KEYSTORM_OIDC_MATCHER'] || 'urn:mace:egi.eu:aai.egi.eu:{role}@{group}' %>
-  voms:
-    default_email: <%= ENV['KEYSTORM_VOMS_DEFAULT_EMAIL'] || 'root@localhost' %>
   catalog: # List of catalog entries
     - endpoints:
         - region_id: rOCCI-server
