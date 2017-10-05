@@ -5,7 +5,14 @@ module Auth
     HEADERS_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_OIDC].freeze : %w[OIDC].freeze
 
     class << self
-      REQUIRED_VARIABLES = %w[OIDC_sub OIDC_edu_person_entitlements].freeze
+      OIDC_ID = 'OIDC_SUB'.freeze
+      OIDC_EMAIL = 'OIDC_EMAIL'.freeze
+      OIDC_GROUPS = 'OIDC_EDU_PERSON_ENTITLEMENTS'.freeze
+      OIDC_NAME = 'OIDC_NAME'.freeze
+      OIDC_IDENTITY = 'OIDC_SUB'.freeze
+      OIDC_ISSUER = 'OIDC_ISS'.freeze
+      OIDC_ACR = 'OIDC_ACR'.freeze
+      REQUIRED_VARIABLES = [OIDC_ID, OIDC_GROUPS].freeze
 
       def unified_credentials(hash)
         Rails.logger.debug { "Building OIDC unified credentials from #{hash.inspect}" }
@@ -16,26 +23,27 @@ module Auth
       private
 
       def credential_args(hash)
-        { id: hash['OIDC_sub'],
-          email: hash['OIDC_email'],
+        { id: hash[OIDC_ID],
+          email: hash[OIDC_EMAIL],
           groups: parse_hash_groups(hash),
           authentication: { type: 'federation', method: 'oidc' },
-          name: hash['OIDC_name'],
-          identity: hash['OIDC_sub'],
+          name: hash[OIDC_NAME],
+          identity: hash[OIDC_IDENTITY],
           expiration: expiration,
-          issuer: hash['OIDC_iss'],
-          acr: hash['OIDC_acr'] }
+          issuer: hash[OIDC_ISSUER],
+          acr: hash[OIDC_ACR] }
       end
 
       def check_hash!(hash)
-        raise Errors::AuthenticationError, "env variables does not contain #{REQUIRED_VARIABLES.reject { |var| hash.key?(var) }}" \
-          unless REQUIRED_VARIABLES.all? { |key| hash.key?(key) }
+        return if REQUIRED_VARIABLES.all? { |key| hash.key?(key) }
+        Rails.logger.error { "ENV variables does not contain #{REQUIRED_VARIABLES.reject { |var| hash.key?(var) }}" }
+        raise Errors::AuthenticationError, 'Invalid OIDC env variables set'
       end
 
       def parse_hash_groups(hash)
         groups = Hash.new { |h, k| h[k] = [] }
         regexp = group_regexp
-        hash['OIDC_edu_person_entitlements'].split(';').each do |line|
+        hash[OIDC_GROUPS].split(';').each do |line|
           matches = line.match(regexp)
           groups[matches[:group]] << matches[:role] if matches
         end
