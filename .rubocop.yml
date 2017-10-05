@@ -5,10 +5,6 @@ AllCops:
   Exclude:
     - 'vendor/**/*'
 
-Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*'
-
 Metrics/LineLength:
   Max: 120
 
@@ -36,6 +32,7 @@ Metrics/BlockLength:
     - '**/*.rake'
     - 'spec/**/*.rb'
     - '*.gemspec'
+    - 'config/environments/*'
 
 RSpec/NestedGroups:
   Enabled: false
