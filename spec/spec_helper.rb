@@ -23,15 +23,23 @@ def load_token(filename)
   File.read(File.join(MOCK_DIR, 'tokens', filename)).strip
 end
 
-def load_response(filename, hash: false)
-  response = File.read(File.join(MOCK_DIR, 'responses', filename))
-  response = JSON.parse(response).deep_symbolize_keys if hash
+def load_mock_file(*path, hash: false)
+  file = File.read(File.join(MOCK_DIR, *path))
+  file = JSON.parse(file).deep_symbolize_keys if hash
 
-  response
+  file
 end
 
-def load_request(filename)
-  File.read(File.join(MOCK_DIR, 'requests', filename))
+def load_response(filename, hash: false)
+  load_mock_file('responses', filename, hash: hash)
+end
+
+def load_request(filename, hash: false)
+  load_mock_file('requests', filename, hash: hash)
+end
+
+def load_envs(filename)
+  load_mock_file('auth_envs', filename, hash: true)
 end
 
 WebMock.disable_net_connect!(allow_localhost: true)
