@@ -47,7 +47,8 @@ module Auth
           matches = line.match(regexp)
           groups[matches[:group]] << matches[:role] if matches
         end
-        groups.map { |key, value| { id: key, roles: value } }
+        Utils::GroupFilter.new.run!(groups)
+        groups.map { |key, value| { id: key, roles: value.uniq } }
       end
 
       def group_regexp

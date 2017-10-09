@@ -37,6 +37,7 @@ module Auth
           group = parse_group!(line)
           groups.merge!(group) { |_, oldval, newval| oldval + newval } if group
         end
+        Utils::GroupFilter.new.run!(groups)
         groups.map { |key, value| { id: key, roles: value.uniq } }
       end
 
