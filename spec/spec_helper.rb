@@ -18,6 +18,7 @@ require 'vcr'
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 MOCK_DIR = File.join(File.dirname(__FILE__), 'mock')
+FILTER_FILES_DIR = File.join(MOCK_DIR, 'filterfiles')
 
 def load_token(filename)
   File.read(File.join(MOCK_DIR, 'tokens', filename)).strip
@@ -28,6 +29,10 @@ def load_mock_file(*path, hash: false)
   file = JSON.parse(file).deep_symbolize_keys if hash
 
   file
+end
+
+def load_filterfile(filename)
+  load_mock_file('filterfiles', filename, hash: false)
 end
 
 def load_response(filename, hash: false)
