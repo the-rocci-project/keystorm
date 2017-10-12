@@ -76,4 +76,33 @@ describe Connectors::Opennebula::UserHandler do
       expect(handler.token(username, group, expiration)).not_to be_empty
     end
   end
+
+  describe '.clean_tokens', :vcr do
+    let(:user) { described_class.new.find_by_name 'bandicoot' }
+    let(:group) { Connectors::Opennebula::GroupHandler.new.find_by_name 'test01' }
+
+    context 'with only tokens for specified group' do
+      it 'deletes all tokens' do
+        handler.clean_tokens(user, group)
+        user.info
+        expect(user['LOGIN_TOKEN/TOKEN']).to be_nil
+      end
+    end
+
+    context 'with no tokens for specified group' do
+      it 'doesn\'t delete any tokens' do
+        handler.clean_tokens(user, group)
+        user.info
+        expect(user['LOGIN_TOKEN/TOKEN']).to eq('823ca4e55aab628dca84e7c7b4266c89d51b5fd0')
+      end
+    end
+
+    context 'with tokens for both specified group and other groups' do
+      it 'deletes tokens of specified group and leaves all other tokens' do
+        handler.clean_tokens(user, group)
+        user.info
+        expect(user['LOGIN_TOKEN/TOKEN']).to eq('823ca4e55aab628dca84e7c7b4266c89d51b5fd0')
+      end
+    end
+  end
 end

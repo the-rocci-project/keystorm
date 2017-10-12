@@ -38,6 +38,12 @@ module Connectors
 
         handle_opennebula_error { user.login(username, '', (expiration.to_i - Time.now.to_i), group.id) }
       end
+
+      def clean_tokens(user, group)
+        user.each('LOGIN_TOKEN') do |token|
+          handle_opennebula_error { user.login(user.name, token['TOKEN'], 0) } if token['EGID'].to_i == group.id
+        end
+      end
     end
   end
 end
