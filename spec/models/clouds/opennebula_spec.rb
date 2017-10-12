@@ -31,6 +31,11 @@ describe Clouds::Opennebula do
     it 'obtains an auth token' do
       expect(opennebula.token(username, group, expiration)).not_to be_empty
     end
+
+    it 'cleans old tokens for the same group' do
+      opennebula.token(username, group, expiration)
+      expect(Connectors::Opennebula::UserHandler.new.find_by_name('bandicoot')['LOGIN_TOKEN/TOKEN'].length).to eq(40)
+    end
   end
 
   describe '.autocreate', :vcr do
