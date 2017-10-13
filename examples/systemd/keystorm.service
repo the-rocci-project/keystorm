@@ -11,11 +11,8 @@ Group=keystorm
 PrivateTmp=true
 Restart=always
 
-# ExecStart="bin/bundle exec --keep-file-descriptors puma"
-# WorkingDirectory=/opt/keystorm
-
-ExecStart="/opt/keystorm/bin/keystorm"
-WorkingDirectory=/opt/keystorm/embedded/app/keystorm
+ExecStart="bin/bundle exec --keep-file-descriptors puma"
+WorkingDirectory=/opt/keystorm
 
 [Install]
 WantedBy=multi-user.target
