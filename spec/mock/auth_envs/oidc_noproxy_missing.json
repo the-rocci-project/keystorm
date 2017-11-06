@@ -1,0 +1,6 @@
+{
+    "OIDC_EDU_PERSON_ENTITLEMENTS" : "urn:mace:egi.eu:aai.egi.eu:member@group01",
+    "OIDC_NAME" : "Gordon Freeman",
+    "OIDC_ISS" : "bmesa.us",
+    "OIDC_ACR" : "apeture.us"
+}

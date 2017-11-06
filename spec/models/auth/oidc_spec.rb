@@ -1,38 +1,32 @@
 require 'rails_helper'
 
 describe Auth::Oidc, type: :model do
-  describe '#parse_hash_groups' do
-    context 'with correct groups' do
-      let(:env_hash) do
-        { 'OIDC_EDU_PERSON_ENTITLEMENTS' \
-           => File.read(File.join(MOCK_DIR, 'groups')) }
+  describe '.unified_credentials' do
+    context 'with correct env' do
+      context 'minimal' do
+        let(:oidc) { described_class.new(load_envs('oidc_noproxy_mini.json')) }
+
+        it 'wont raise error' do
+          expect { oidc.unified_credentials }.not_to raise_error
+        end
       end
 
-      let(:groups) { Auth::Oidc.send(:parse_hash_groups, env_hash) }
+      context 'all' do
+        let(:oidc) { described_class.new(load_envs('oidc_noproxy_normal.json')) }
 
-      it 'returns not nil' do
-        expect(groups).not_to be_nil
-      end
-
-      it 'returns 1 groups' do
-        expect(groups.size).to eq(1)
+        it 'wont raise error' do
+          expect { oidc.unified_credentials }.not_to raise_error
+        end
       end
     end
 
-    context 'with incorrect groups' do
-      let(:env_hash) do
-        { 'OIDC_EDU_PERSON_ENTITLEMENTS' \
-          => File.read(File.join(MOCK_DIR, 'wrong_groups')) }
-      end
+    context 'with incorrect env' do
+      context 'with missing required field' do
+        let(:oidc) { described_class.new(load_envs('oidc_noproxy_missing.json')) }
 
-      let(:groups) { Auth::Oidc.send(:parse_hash_groups, env_hash) }
-
-      it 'returns not nil' do
-        expect(groups).not_to be_nil
-      end
-
-      it 'returns 0 groups' do
-        expect(groups.size).to eq(0)
+        it 'will raise error' do
+          expect { oidc.unified_credentials }.to raise_error(Errors::AuthenticationError)
+        end
       end
     end
   end

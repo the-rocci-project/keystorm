@@ -1,0 +1,11 @@
+{
+  "GRST_VOMS_FQANS" : "/fedcloud.egi.eu/Role=NULL/Capability=NULL",
+  "GRST_CRED_0" : "X509USER 1501851719 1533387719 2 /C=IT/O=INFN/OU=Robot/L=Catania/CN=Robot: Catania Science Gateway - Johnny Tester",
+  "GRST_CRED_1" : "GSIPROXY 1509527762 1509614162 2 /C=IT/O=INFN/OU=Robot/L=Catania/CN=Robot: Catania Science Gateway - Johnny Tester/CN=eToken:User1",
+  "GRST_CRED_2" : "GSIPROXY 1509527764 1509614162 2 /C=IT/O=INFN/OU=Robot/L=Catania/CN=Robot: Catania Science Gateway - Johnny Tester/CN=eToken:User1/CN=634342021",
+  "GRST_CRED_3" : "VOMS 1509527764 1509614162 0 /fedcloud.egi.eu/Role=NULL/Capability=NULL",
+  "GRST_ROBOT_DN" : "/C=IT/O=INFN/OU=Robot/L=Catania/CN=Robot: Catania Science Gateway - Johnny Tester",
+  "SSL_CLIENT_I_DN" : "/C=IT/O=INFN/OU=Robot/L=Catania/CN=Robot: Catania Science Gateway - Johnny Tester/CN=eToken:User1",
+  "SSL_CLIENT_S_DN" : "/C=IT/O=INFN/OU=Robot/L=Catania/CN=Robot: Catania Science Gateway - Johnny Tester/CN=eToken:User1/CN=634342021",
+  "SSL_CLIENT_VERIFY" : "SUCCESS"
+}

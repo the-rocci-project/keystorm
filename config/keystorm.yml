@@ -13,6 +13,8 @@ defaults: &defaults
   token_key: <%= ENV['KEYSTORM_TOKEN_KEY'] %>
   token_iv: <%= ENV['KEYSTORM_TOKEN_IV'] %>
   memcache: <%= ENV['KEYSTORM_MEMCACHE'] || 'localhost:11211' %>
+  voms:
+    pusp_file: <%= ENV['KEYSTORM_VOMS_PUSP_FILE'] %>
   oidc:
     matcher: <%= ENV['KEYSTORM_OIDC_MATCHER'] || 'urn:mace:egi.eu:aai.egi.eu:{role}@{group}' %>
   catalog: # List of catalog entries
