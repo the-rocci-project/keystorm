@@ -38,7 +38,7 @@ module Auth
     private
 
     def verify!
-      raise Errors::AuthenticationError, 'SSL not veryfied' \
+      raise Errors::AuthenticationError, 'SSL not verified' \
         unless env[SSL_VERIFY] == 'SUCCESS'
     end
 
