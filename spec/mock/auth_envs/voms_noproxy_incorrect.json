@@ -1,0 +1,7 @@
+{
+    "GRST_CRED_0" : "X509USER 1526731200 1 /DC=org/DC=terena/DC=tcs/C=CZ/O=BMESA/CN=Gordon Freeman 1997",
+    "GRST_CRED_1" : "GSIPROXY 1500381287 1500424487 1 /DC=org/DC=terena/DC=tcs/C=CZ/O=BMESA/CN=Gordon Freeman 1997/CN=99672074",
+    "GRST_CRED_2" : "VOMS 1500381287 1500424487 0 /lambda/Role=NULL/Capability=NULL",
+    "GRST_VOMS_FQANS" : "/group01/Role=actor/Capability=NULL",
+    "SSL_CLIENT_VERIFY" : "SUCCESS"
+}

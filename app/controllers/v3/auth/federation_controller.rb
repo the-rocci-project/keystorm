@@ -22,7 +22,7 @@ module V3
       private
 
       def auth_headers(type)
-        @credentials = type.unified_credentials(unify_headers(type::HEADERS_FILTERS))
+        @credentials = type.new(unify_headers(type::HEADERS_FILTERS)).unified_credentials
         headers[x_subject_token_header_key] = Utils::Tokenator.to_token(credentials.to_hash)
       end
 
