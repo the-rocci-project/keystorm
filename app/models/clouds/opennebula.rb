@@ -57,6 +57,7 @@ module Clouds
       Rails.logger.debug { "Generating OpenNebula user template from credentials #{hash.inspect}" }
       hash[:authentication] = hash[:authentication][:method]
       hash.delete :groups
+      hash.delete :expiration
 
       template = hash.map { |key, value| "\"#{key.upcase}\" = \"#{value}\"" }.join("\n")
       Rails.logger.debug { "Template: #{template.inspect}" }
