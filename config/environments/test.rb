@@ -38,7 +38,7 @@ Rails.application.configure do
   config.x.audit.level = ActiveSupport::Logger::INFO
 
   config.log_level = config.keystorm['log_level'].to_sym
-  config.logger = ActiveSupport::Logger.new(STDOUT)
+  config.logger = ActiveSupport::Logger.new('/dev/null')
 
   config.logstasher.enabled = true
   config.logstasher.suppress_app_log = false
