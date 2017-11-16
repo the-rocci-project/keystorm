@@ -81,7 +81,7 @@ describe Utils::GroupFilter, type: :model do
     end
 
     context 'with filterfile with 2 groups' do
-      context 'that both have roles' do
+      context 'when both have roles' do
         let(:filtered) do
           stub_const('Utils::GroupFilter::FILTER_FILE_PATH', File.join(FILTER_FILES_DIR, 'grp2.yml'))
           described_class.new.run!(groups)

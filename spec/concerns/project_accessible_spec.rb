@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-shared_context 'project_accessible' do
+shared_examples_for 'project_accessible' do
   let(:controller) { described_class.new }
   let(:credentials) { UnifiedCredentials.new credentials_hash }
   let(:credentials_hash) do

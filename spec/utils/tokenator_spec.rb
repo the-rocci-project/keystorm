@@ -47,13 +47,13 @@ describe Utils::Tokenator, type: :model do
   end
 
   describe '#from_token' do
-    context 'from tokenized string' do
+    context 'with tokenized string' do
       it 'returns correct string' do
         expect(described_class.from_token(test_token, parse: false)).to eq('testing')
       end
     end
 
-    context 'from tokenized hash' do
+    context 'with tokenized hash' do
       it 'returns correct hash' do
         expect(described_class.from_token(hash_token)).to eq(test_hash)
       end

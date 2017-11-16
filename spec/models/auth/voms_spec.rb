@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Auth::Voms, type: :model do
   describe '.unified_credentials' do
     context 'with correct credentials' do
-      context 'normal' do
+      context 'when normal' do
         let(:voms) { described_class.new(load_envs('voms_noproxy.json')) }
 
         it 'wont raise error' do
@@ -11,7 +11,7 @@ describe Auth::Voms, type: :model do
         end
       end
 
-      context 'robot not in puspfile' do
+      context 'when robot not in puspfile' do
         let(:voms) { described_class.new(load_envs('voms_robot_correct.json')) }
 
         it 'wont raise error' do
@@ -23,7 +23,7 @@ describe Auth::Voms, type: :model do
         end
       end
 
-      context 'robot in puspfile' do
+      context 'when robot in puspfile' do
         let(:voms) do
           stub_const('Utils::Pusp::PUSP_FILE_PATH', File.join(MOCK_DIR, 'puspfiles', 'pusp0'))
           described_class.new(load_envs('voms_robot_correct.json'))
@@ -53,7 +53,7 @@ describe Auth::Voms, type: :model do
         end
       end
 
-      context 'not verified' do
+      context 'when not verified' do
         let(:voms) { described_class.new(load_envs('voms_noproxy_incorrect.json')) }
 
         it 'will raise error' do

@@ -55,13 +55,13 @@ describe Connectors::Opennebula::Handler do
       handler.pool = OpenNebula::GroupPool.new handler.client
     end
 
-    context 'if element with specified name exists' do
+    context 'when element with specified name exists' do
       it 'returns element with specified name from the pool' do
         expect(handler.find_by_name('test-group').id).to eq(105)
       end
     end
 
-    context 'if there is no element with specified name' do
+    context 'when there is no element with specified name' do
       it 'returns nil' do
         expect(handler.find_by_name('nonexistingname')).to be_nil
       end
@@ -73,13 +73,13 @@ describe Connectors::Opennebula::Handler do
       handler.pool = OpenNebula::GroupPool.new handler.client
     end
 
-    context 'if element with specified id exists' do
+    context 'when element with specified id exists' do
       it 'returns element with specified id from the pool' do
         expect(handler.find_by_id(105).name).to eq('test-group')
       end
     end
 
-    context 'if there is no element with specified id' do
+    context 'when there is no element with specified id' do
       it 'returns nil' do
         expect(handler.find_by_id(42)).to be_nil
       end
@@ -91,13 +91,13 @@ describe Connectors::Opennebula::Handler do
       handler.pool = OpenNebula::GroupPool.new handler.client
     end
 
-    context 'if element with specified id exists' do
+    context 'when element with specified id exists' do
       it 'returns true' do
         expect(handler).to be_exist(105)
       end
     end
 
-    context 'if there is no element with specified id' do
+    context 'when there is no element with specified id' do
       it 'returns false' do
         expect(handler).to be_exist(105)
       end
@@ -191,7 +191,7 @@ describe Connectors::Opennebula::Handler do
       end
     end
 
-    context 'on pool with info_all! method' do
+    context 'with pool with info_all! method' do
       before do
         handler.pool = OpenNebula::ImagePool.new handler.client
         allow(handler.pool).to receive(:info_all!)
@@ -203,15 +203,17 @@ describe Connectors::Opennebula::Handler do
       end
     end
 
-    context 'on pool without info_all! method' do
-      before do
-        handler.pool = OpenNebula::DatastorePool.new handler.client
-        allow(handler.pool).to receive(:info!)
-      end
+    if OpenNebula::VERSION < '5.4.3'
+      context 'with pool without info_all! method' do
+        before do
+          handler.pool = OpenNebula::DatastorePool.new handler.client
+          allow(handler.pool).to receive(:info!)
+        end
 
-      it 'receives info! call' do
-        handler.send(:reload!)
-        expect(handler.pool).to have_received(:info!)
+        it 'receives info! call' do
+          handler.send(:reload!)
+          expect(handler.pool).to have_received(:info!)
+        end
       end
     end
   end
