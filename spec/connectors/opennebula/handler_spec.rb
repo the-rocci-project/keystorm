@@ -203,15 +203,17 @@ describe Connectors::Opennebula::Handler do
       end
     end
 
-    context 'on pool without info_all! method' do
-      before do
-        handler.pool = OpenNebula::DatastorePool.new handler.client
-        allow(handler.pool).to receive(:info!)
-      end
+    if OpenNebula::VERSION < '5.4.3'
+      context 'on pool without info_all! method' do
+        before do
+          handler.pool = OpenNebula::DatastorePool.new handler.client
+          allow(handler.pool).to receive(:info!)
+        end
 
-      it 'receives info! call' do
-        handler.send(:reload!)
-        expect(handler.pool).to have_received(:info!)
+        it 'receives info! call' do
+          handler.send(:reload!)
+          expect(handler.pool).to have_received(:info!)
+        end
       end
     end
   end
