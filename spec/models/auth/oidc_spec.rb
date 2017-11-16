@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Auth::Oidc, type: :model do
   describe '.unified_credentials' do
     context 'with correct env' do
-      context 'minimal' do
+      context 'with minimal attributes' do
         let(:oidc) { described_class.new(load_envs('oidc_noproxy_mini.json')) }
 
         it 'wont raise error' do
@@ -11,7 +11,7 @@ describe Auth::Oidc, type: :model do
         end
       end
 
-      context 'all' do
+      context 'with all attributes' do
         let(:oidc) { described_class.new(load_envs('oidc_noproxy_normal.json')) }
 
         it 'wont raise error' do

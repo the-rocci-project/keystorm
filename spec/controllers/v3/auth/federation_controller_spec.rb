@@ -16,10 +16,10 @@ describe V3::Auth::FederationController do
   describe 'GET #voms', type: :request do
     let(:headers) { JSON_HEADERS.merge(voms_env) }
 
-    context 'env with no prefix' do
+    context 'with env with no prefix' do
       let(:voms_env) { load_envs('voms_noproxy.json') }
 
-      context 'behind proxy' do
+      context 'when behind proxy' do
         before do
           Rails.configuration.keystorm['behind_proxy'] = true
           stub_const('Auth::Voms::HEADERS_FILTERS', %w[HTTP_SSL HTTP_GRST])
@@ -31,7 +31,7 @@ describe V3::Auth::FederationController do
         end
       end
 
-      context 'not behind proxy' do
+      context 'when not behind proxy' do
         before do
           Rails.configuration.keystorm['behind_proxy'] = false
           stub_const('Auth::Voms::HEADERS_FILTERS', %w[SSL GRST])
@@ -49,10 +49,10 @@ describe V3::Auth::FederationController do
       end
     end
 
-    context 'env with HTTP_ prefix' do
+    context 'with env with HTTP_ prefix' do
       let(:voms_env) { load_envs('voms_correct.json') }
 
-      context 'behind proxy' do
+      context 'when behind proxy' do
         before do
           Rails.configuration.keystorm['behind_proxy'] = true
           stub_const('Auth::Voms::HEADERS_FILTERS', %w[HTTP_SSL HTTP_GRST])
@@ -69,7 +69,7 @@ describe V3::Auth::FederationController do
         end
       end
 
-      context 'not behind proxy' do
+      context 'when not behind proxy' do
         before do
           Rails.configuration.keystorm['behind_proxy'] = false
           stub_const('Auth::Voms::HEADERS_FILTERS', %w[SSL GRST])

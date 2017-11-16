@@ -64,13 +64,13 @@ describe Clouds::Opennebula do
     let(:group) { 'group01' }
 
     context 'with already existing user' do
-      context 'already in the group' do
+      context 'when already in the group' do
         it 'does nothing' do
           expect { opennebula.autocreate(credentials, group) }.not_to raise_error
         end
       end
 
-      context 'not in the group' do
+      context 'when not in the group' do
         let(:group) { 'test01' }
 
         it 'adds user to the group' do
