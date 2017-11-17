@@ -1,4 +1,13 @@
 
+1.1.0 / 2017-11-17
+==================
+
+  * Minor dependency updates
+  * Update README
+  * Remove misleading attribute from OpenNebula user autocreate
+  * Add support for PUSP proxy certificates (VOMS auth)
+  * Updated system integration examples
+
 1.0.1 / 2017-10-12
 ==================
 
