@@ -22,7 +22,7 @@ jobs:
 
           docker login -u $DOCKER_USER -p $DOCKER_PASS
 
-          docker build --build-arg branch=$BRANCH --build-arg version="$VERSION" -t therocciproject/keystorm:$TAG .
+          docker build --build-arg branch=$BRANCH --build-arg version="$VERSION" -t therocciproject/keystorm:$TAG ./docker
           docker push therocciproject/keystorm:$TAG
 
           if [ "$LATEST" == "$CIRCLE_TAG" ]; then
