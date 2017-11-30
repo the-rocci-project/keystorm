@@ -24,6 +24,8 @@ RUN useradd --system --shell /bin/false --home ${appDir} ${name} && \
     ln -s ${appDir}/log ${logDir} && \
     chown -R ${name}:${name} ${appDir} ${appDir}/log ${logDir}
 
+COPY bin/* /keystorm/bin/
+
 USER ${name}
 
 VOLUME ["${logDir}"]
@@ -34,4 +36,4 @@ RUN bundle install --path ./vendor --deployment --without development test
 
 EXPOSE 3000
 
-ENTRYPOINT ["bundle", "exec", "--keep-file-descriptors", "puma"]
+ENTRYPOINT ["/keystorm/bin/keystorm-wrapper.sh"]
