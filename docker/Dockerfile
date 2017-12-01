@@ -3,8 +3,10 @@ FROM ruby:2.4-stretch
 ARG branch=master
 ARG version
 
-ENV name="keystorm"
-ENV appDir="/opt/${name}" \
+ENV name="keystorm" \
+    project="the-rocci-project" \
+    installDir="/opt"
+ENV appDir="${installDir}/${name}-${version}" \
     logDir="/var/log/${name}" \
     TERM="xterm"
 
@@ -16,7 +18,7 @@ LABEL application=${name} \
 
 SHELL ["/bin/bash", "-c"]
 
-RUN git clone https://github.com/the-rocci-project/keystorm.git ${appDir}
+RUN curl -SsL https://github.com/${project}/${name}/archive/v${version}.tar.gz | tar -xzC ${installDir}
 
 RUN useradd --system --shell /bin/false --home ${appDir} ${name} && \
     usermod -L ${name} && \
