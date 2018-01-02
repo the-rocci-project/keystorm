@@ -28,7 +28,6 @@ group :development, :test do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'vcr', '~> 3.0'
   gem 'webmock', '~> 3.0'
-  gem 'yard'
 end
 
 # Include external bundles
