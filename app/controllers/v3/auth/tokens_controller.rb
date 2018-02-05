@@ -41,7 +41,10 @@ module V3
       end
 
       def respond(cloud_token)
-        headers[x_subject_token_header_key] = Utils::Tokenator.to_token(cloud_token)
+        cloud_token = Utils::Tokenator.to_token(cloud_token) \
+          if Rails.configuration.keystorm['encrypt_scoped_token']
+
+        headers[x_subject_token_header_key] = cloud_token
         respond_with(token_response, status: :created)
       end
 
