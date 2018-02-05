@@ -1,4 +1,10 @@
 
+1.2.0 / 2018-02-05
+==================
+
+  * Add option to disable scoped token encryption
+  * Improve dockerization to allow reading secrets from files instead of env variables
+
 1.1.0 / 2017-11-17
 ==================
 
