@@ -12,6 +12,7 @@ defaults: &defaults
   token_cipher: <%= ENV['KEYSTORM_TOKEN_CIPHER'] || 'AES-128-CBC' %>
   token_key: <%= ENV['KEYSTORM_TOKEN_KEY'] %>
   token_iv: <%= ENV['KEYSTORM_TOKEN_IV'] %>
+  encrypt_scoped_token: <%= ENV['KEYSTORM_ENCRYPT_SCOPED_TOKEN'] || true %>
   memcache: <%= ENV['KEYSTORM_MEMCACHE'] || 'localhost:11211' %>
   voms:
     pusp_file: <%= ENV['KEYSTORM_VOMS_PUSP_FILE'] %>

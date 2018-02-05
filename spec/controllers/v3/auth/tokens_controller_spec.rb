@@ -56,18 +56,43 @@ describe V3::Auth::TokensController, :vcr, type: :controller do
     context 'with correct request' do
       let(:body) { load_request 'tokens05.json' }
 
-      it 'returns created status code' do
-        expect(response).to have_http_status :created
+      context 'without encryption' do
+        before do
+          Rails.configuration.keystorm['encrypt_scoped_token'] = false
+        end
+
+        it 'returns created status code' do
+          expect(response).to have_http_status :created
+        end
+
+        it 'sets correct headers' do
+          expect(response.headers['X-Subject-Token']).not_to be_empty
+        end
+
+        it 'sets a valid token as header' do
+          token = response.headers['X-Subject-Token']
+          expect(token).to eq("aaa:#{Connectors::Opennebula::UserHandler.new.find_by_name('aaa')['LOGIN_TOKEN/TOKEN']}")
+        end
       end
 
-      it 'sets correct headers' do
-        expect(response.headers['X-Subject-Token']).not_to be_empty
-      end
+      context 'with encryption' do
+        before do
+          Rails.configuration.keystorm['encrypt_scoped_token'] = true
+        end
 
-      it 'sets a valid token as header' do
-        keystorm_token = response.headers['X-Subject-Token']
-        cloud_token = Utils::Tokenator.from_token keystorm_token, parse: false
-        expect(cloud_token).to eq("aaa:#{Connectors::Opennebula::UserHandler.new.find_by_name('aaa')['LOGIN_TOKEN/TOKEN']}")
+        it 'returns created status code' do
+          expect(response).to have_http_status :created
+        end
+
+        it 'sets correct headers' do
+          expect(response.headers['X-Subject-Token']).not_to be_empty
+        end
+
+        it 'sets a valid token as header' do
+          keystorm_token = response.headers['X-Subject-Token']
+          cloud_token = Utils::Tokenator.from_token keystorm_token, parse: false
+          expect(cloud_token).to eq("aaa:#{Connectors::Opennebula::UserHandler.new.find_by_name('aaa')['LOGIN_TOKEN/TOKEN']}")
+        end
       end
     end
   end
