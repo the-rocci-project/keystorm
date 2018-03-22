@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Keystorm" src="https://i.imgur.com/3k2nPim.png" width="300"/>
+  <img alt="Keystorm" src="https://i.imgur.com/PsaUDCU.png" width="300"/>
 </p>
 
 # Keystorm
