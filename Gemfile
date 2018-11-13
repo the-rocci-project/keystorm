@@ -12,6 +12,11 @@ gem 'rack-attack', '~> 5.0.1'
 gem 'rack-cors', '~> 0.4'
 gem 'rails', '~> 5.1.2'
 gem 'responders', '~> 2.4'
+gem 'rails-html-sanitizer', '>= 1.0.4'
+gem 'ffi', '>= 1.9.24'
+gem 'sprockets', '>= 3.7.2'
+gem 'nokogiri', '>= 1.8.2'
+gem 'loofah', '>= 2.2.3'
 
 group :development, :test do
   gem 'byebug'
