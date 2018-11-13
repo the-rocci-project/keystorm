@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ServerId
-  SPACE = ' '.freeze
-  HEADER_KEY = 'Server'.freeze
-  SERVER_ID = 'Keystorm'.freeze
+  SPACE = ' '
+  HEADER_KEY = 'Server'
+  SERVER_ID = 'Keystorm'
   CHEEKY_HEADERS = {
     'X-Powered-By' => 'Unicorns'
   }.freeze
@@ -10,7 +12,7 @@ class ServerId
     'X-Frame-Options' => 'deny',
     'Content-Security-Policy' => 'default-src \'none\''
   }.freeze
-  RACK_ATTACK_THROTTLE_KEY = 'rack.attack.throttle_data'.freeze
+  RACK_ATTACK_THROTTLE_KEY = 'rack.attack.throttle_data'
 
   def initialize(app)
     @app = app

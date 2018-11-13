@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'digest'
 
 module TokenRespondable
@@ -35,7 +37,7 @@ module TokenRespondable
       },
       id: Digest::SHA1.hexdigest(credentials.id),
       name: credentials.id,
-      :'OS-FEDERATION' => federation_hash
+      'OS-FEDERATION': federation_hash
     }
   end
 

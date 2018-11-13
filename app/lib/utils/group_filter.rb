@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'yaml'
 
 module Utils
@@ -13,6 +15,7 @@ module Utils
 
       groups.each_with_object(groups) do |(key, val), hash|
         next unless @filterfile.key?(key)
+
         maped = @filterfile[key] || []
         hash[key] = val & maped
       end

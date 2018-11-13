@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe UnifiedCredentials, type: :model do
   let(:credentials_hash) do
-    { id:              '1',
-      email:           'ben.dover@majl.ru',
-      groups:          'group',
-      authentication:  'federation',
-      name:            'Ben Dover',
-      identity:        '1',
-      expiration:      '123456789',
-      issuer:          'gogol.com',
-      acr:             'goglo.com' }
+    { id: '1',
+      email: 'ben.dover@majl.ru',
+      groups: 'group',
+      authentication: 'federation',
+      name: 'Ben Dover',
+      identity: '1',
+      expiration: '123456789',
+      issuer: 'gogol.com',
+      acr: 'goglo.com' }
   end
 
   describe '#new' do

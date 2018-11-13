@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module V3
   class InfoController < ApplicationController
     include Describable

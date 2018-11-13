@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Clouds::CloudProxy do
@@ -16,7 +18,7 @@ describe Clouds::CloudProxy do
 
     context 'with supported cloud type' do
       it 'returns an instance of CloudProxy' do
-        is_expected.to be_instance_of described_class
+        expect(cloud_proxy).to be_instance_of described_class
       end
     end
   end

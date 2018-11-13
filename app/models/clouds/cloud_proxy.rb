@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Clouds
   class CloudProxy < SimpleDelegator
     CLOUD_TYPES = {

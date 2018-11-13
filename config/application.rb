@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails'
@@ -35,6 +37,6 @@ module Keystorm
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     # Pull version information
-    require File.expand_path('../version', __FILE__)
+    require File.expand_path('version', __dir__)
   end
 end

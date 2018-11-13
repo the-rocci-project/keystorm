@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Clouds::Opennebula do
@@ -5,7 +7,7 @@ describe Clouds::Opennebula do
 
   describe '#new' do
     it 'creates an instance of Clouds::Opennebula' do
-      is_expected.to be_instance_of described_class
+      expect(opennebula).to be_instance_of described_class
     end
   end
 
@@ -42,23 +44,23 @@ describe Clouds::Opennebula do
     let(:credentials) { UnifiedCredentials.new hash }
     let(:hash) do
       {
-        id:              'bendicoot',
-        email:           'ben.dover@majl.ru',
-        groups:          [
+        id: 'bendicoot',
+        email: 'ben.dover@majl.ru',
+        groups: [
           {
             id: 'group01',
             roles: []
           }
         ],
-        authentication:  {
+        authentication: {
           type: 'federation',
           method: 'oidc'
         },
-        name:            'Ben Dover',
-        identity:        '1234',
-        expiration:      '1505726089',
-        issuer:          'gogol.com',
-        acr:             'goglo.com'
+        name: 'Ben Dover',
+        identity: '1234',
+        expiration: '1505726089',
+        issuer: 'gogol.com',
+        acr: 'goglo.com'
       }
     end
     let(:group) { 'group01' }

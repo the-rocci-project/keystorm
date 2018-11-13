@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Dig
   def dig(key, *rest)
     value = self[key]

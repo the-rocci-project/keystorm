@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Acceptable
   extend ActiveSupport::Concern
 
@@ -13,12 +15,14 @@ module Acceptable
   # Checks request format and defaults or returns HTTP[406].
   def validate_requested_format!
     return if request.format.respond_to?(:symbol) && ACCEPTABLE_FORMATS.include?(request.format.symbol)
+
     raise Errors::FormatError, 'Requested media format is not acceptable'
   end
 
   # Checks request format and defaults or returns HTTP[406].
   def validate_provided_format!
     return if request.content_mime_type.respond_to?(:symbol) && ACCEPTABLE_FORMATS.include?(request.content_mime_type.symbol)
+
     raise Errors::FormatError, 'Provided media format is not acceptable'
   end
 end

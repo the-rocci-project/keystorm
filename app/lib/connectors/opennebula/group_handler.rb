@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Connectors
   module Opennebula
     class GroupHandler < Handler
       EXCLUDE = %w[oneadmin users].freeze
-      KEYSTORM_MANAGED_ATTRIBUTE = 'KEYSTORM'.freeze
-      KEYSTORM_MANAGED_VALUE = 'YES'.freeze
+      KEYSTORM_MANAGED_ATTRIBUTE = 'KEYSTORM'
+      KEYSTORM_MANAGED_VALUE = 'YES'
 
       def initialize
         super

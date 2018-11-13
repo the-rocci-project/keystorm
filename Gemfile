@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -6,17 +8,17 @@ git_source(:github) do |repo_name|
 end
 
 gem 'dalli', '~> 2.7'
+gem 'ffi', '>= 1.9.24'
 gem 'logstasher', '~> 1.2'
+gem 'loofah', '>= 2.2.3'
+gem 'nokogiri', '>= 1.8.2'
 gem 'puma', '~> 3.10'
 gem 'rack-attack', '~> 5.0.1'
 gem 'rack-cors', '~> 0.4'
 gem 'rails', '~> 5.1.2'
-gem 'responders', '~> 2.4'
 gem 'rails-html-sanitizer', '>= 1.0.4'
-gem 'ffi', '>= 1.9.24'
+gem 'responders', '~> 2.4'
 gem 'sprockets', '>= 3.7.2'
-gem 'nokogiri', '>= 1.8.2'
-gem 'loofah', '>= 2.2.3'
 
 group :development, :test do
   gem 'byebug'
@@ -38,5 +40,6 @@ end
 # Include external bundles
 Dir.glob(File.join(File.dirname(__FILE__), 'Gemfile.*')) do |gemfile|
   next if gemfile.end_with?('.lock')
+
   eval(IO.read(gemfile), binding)
 end

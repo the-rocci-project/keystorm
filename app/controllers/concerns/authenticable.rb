@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Authenticable
   extend ActiveSupport::Concern
 
   # Header token const
-  X_AUTH_TOKEN_HEADER_KEY = 'X-Auth-Token'.freeze
-  X_SUBJECT_TOKEN_HEADER_KEY = 'X-Subject-Token'.freeze
+  X_AUTH_TOKEN_HEADER_KEY = 'X-Auth-Token'
+  X_SUBJECT_TOKEN_HEADER_KEY = 'X-Subject-Token'
 
   class_methods do
     # Returns HTTP header key for token.

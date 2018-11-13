@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'yaml'
 
 module Utils
@@ -10,10 +12,10 @@ module Utils
       load_pusp
     end
 
-    def allowed?(dn)
+    def allowed?(pusp_dn)
       return false unless puspfile
 
-      puspfile.include?(dn)
+      puspfile.include?(pusp_dn)
     end
 
     private

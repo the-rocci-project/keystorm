@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'base64'
 require 'openssl'
@@ -26,6 +28,7 @@ module Utils
         Rails.logger.debug { "Data: #{data.inspect}" }
 
         return data unless parse
+
         parse_data data
       rescue ArgumentError, OpenSSL::Cipher::CipherError => ex
         raise Errors::AuthenticationError, "failed to parse data from token: #{ex}"

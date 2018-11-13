@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'digest'
 
 module Auth
@@ -6,15 +8,15 @@ module Auth
 
     HEADERS_FILTERS = Rails.configuration.keystorm['behind_proxy'] ? %w[HTTP_SSL HTTP_GRST].freeze : %w[SSL GRST].freeze
 
-    DN_MATCHER = /^X509USER (\d+) (\d+) (\d+) (?<dn>.+)$/
-    DN_ROBOT_MATCHER = /^GSIPROXY (\d+) (\d+) (\d+) (?<dn>.+)$/
-    VOMS_GROUP_REGEXP = %r{^\/(?<group>[^\s]+)\/Role=(?<role>[^\s]+)\/Capability=(?<capability>[^\s]+)$}
+    DN_MATCHER = /^X509USER (\d+) (\d+) (\d+) (?<dn>.+)$/.freeze
+    DN_ROBOT_MATCHER = /^GSIPROXY (\d+) (\d+) (\d+) (?<dn>.+)$/.freeze
+    VOMS_GROUP_REGEXP = %r{^\/(?<group>[^\s]+)\/Role=(?<role>[^\s]+)\/Capability=(?<capability>[^\s]+)$}.freeze
 
-    ROBOT_KEY = 'GRST_ROBOT_DN'.freeze
-    DN_KEY = 'GRST_CRED_0'.freeze
-    DN_ROBOT_KEY = 'GRST_CRED_1'.freeze
-    GROUPS_KEY = 'GRST_VOMS_FQANS'.freeze
-    SSL_VERIFY = 'SSL_CLIENT_VERIFY'.freeze
+    ROBOT_KEY = 'GRST_ROBOT_DN'
+    DN_KEY = 'GRST_CRED_0'
+    DN_ROBOT_KEY = 'GRST_CRED_1'
+    GROUPS_KEY = 'GRST_VOMS_FQANS'
+    SSL_VERIFY = 'SSL_CLIENT_VERIFY'
 
     attr_reader :env, :pusp
 
@@ -61,6 +63,7 @@ module Auth
 
     def parse_groups!
       raise Errors::AuthenticationError, 'voms group env variable is not set' unless env.key?(GROUPS_KEY)
+
       groups = Hash.new { |h, k| h[k] = [] }
       env[GROUPS_KEY].split(';').each do |line|
         group = parse_group!(line)
@@ -77,6 +80,7 @@ module Auth
     def parse_group!(line)
       matches = line.match(VOMS_GROUP_REGEXP)
       raise Errors::AuthenticationError, 'voms group env variable has invalid format' unless matches
+
       if matches[:group].include?('/')
         Rails.logger.warn { "Ignoring matched VOMS subgroup: #{matches[:group]}" }
         return

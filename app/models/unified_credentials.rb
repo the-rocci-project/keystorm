@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UnifiedCredentials
   attr_reader :id, :email, :groups, :authentication,
               :name, :identity, :expiration, :issuer,
