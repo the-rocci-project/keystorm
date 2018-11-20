@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 shared_examples_for 'project_accessible' do
@@ -7,7 +9,7 @@ shared_examples_for 'project_accessible' do
     {
       id: '1',
       email: 'ben.dover@majl.ru',
-      groups:       [
+      groups: [
         { id: 'fedcloud.egi.eu', roles: ['member'] }
       ],
       authentication: { type: 'federation', method: 'oidc' },

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 
 # Rack attack protection
 module Rack
   class Attack
-    KEYSTORM_THROTTLER_NAME = 'req/ip'.freeze
+    KEYSTORM_THROTTLER_NAME = 'req/ip'
 
     throttle(KEYSTORM_THROTTLER_NAME, limit: 120, period: 1.minute, &:ip)
   end

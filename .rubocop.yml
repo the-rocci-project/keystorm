@@ -1,10 +1,14 @@
 require: rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.1
+  TargetRubyVersion: 2.3
   Exclude:
     - 'vendor/**/*'
     - 'spec/requests/auth_flow_spec.rb'
+
+Style/MixinUsage:
+  Exclude:
+    - 'bin/*'
 
 Metrics/LineLength:
   Max: 120

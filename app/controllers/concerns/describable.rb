@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Describable
   extend ActiveSupport::Concern
 
@@ -6,7 +8,7 @@ module Describable
       version: {
         status: 'stable',
         updated: '2017-10-10T00:00:00Z',
-        :'media-types' => media_types,
+        'media-types': media_types,
         id: 'v3.0',
         links: links
       }

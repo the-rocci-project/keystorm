@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe V3::Auth::TokensController, :vcr, type: :controller do

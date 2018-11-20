@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Connectors::Opennebula::GroupHandler do
@@ -5,7 +7,7 @@ describe Connectors::Opennebula::GroupHandler do
 
   describe '#new' do
     it 'creates an instance of Handler' do
-      is_expected.to be_instance_of described_class
+      expect(handler).to be_instance_of described_class
     end
 
     it 'initialize pool as GroupPool' do

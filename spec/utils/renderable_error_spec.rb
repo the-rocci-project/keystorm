@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe Utils::RenderableError do
@@ -5,7 +7,7 @@ describe Utils::RenderableError do
 
   describe '#new' do
     it 'creates an instance of Utils::RenderableError' do
-      is_expected.to be_instance_of described_class
+      expect(error).to be_instance_of described_class
     end
 
     it 'sets status to provided value' do
