@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'dalli', '~> 2.7'
+gem 'dalli', '~> 3.2'
 gem 'ffi', '>= 1.9.24'
 gem 'logstasher', '~> 1.2'
 gem 'loofah', '>= 2.2.3'
